@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Carousel } from "react-bootstrap";
-import "./carousel.scss";
+import "./Carousel.scss";
 import {
     Variable
 } from './ManageCarousel/CarouselVariable'
