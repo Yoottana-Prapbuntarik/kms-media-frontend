@@ -4,17 +4,18 @@ import draftToMarkdown from "draftjs-to-markdown";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import ReactMarkdownWithHtml from "react-markdown/with-html";
-import { config } from "../../config-project.json";
+import firebase from "firebase";
 import ReactDropzone from "../ReactDropzone/reactDropzone";
-const EditorTools = ({ onSubmitWriteBlog,
-    onSubmitSaveDraft,
-    dataReducer,
-    handleChangeTitle,
-    handleChangeSubTitle,
-    handleChangeCover,
-    handleChangeCategory,
-    writeBlogPresenter
-  }) => {
+const EditorTools = ({
+  onSubmitWriteBlog,
+  onSubmitSaveDraft,
+  dataReducer,
+  handleChangeTitle,
+  handleChangeSubTitle,
+  handleChangeCover,
+  handleChangeCategory,
+  writeBlogPresenter,
+}) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [data, setData] = useState(null);
 
@@ -22,9 +23,13 @@ const EditorTools = ({ onSubmitWriteBlog,
 
   const [isFetch, setIsFetch] = useState(false);
   useEffect(() => {
-      let loadDraftLocalStorage = writeBlogPresenter.contentDraft;
+    let loadDraftLocalStorage = writeBlogPresenter.contentDraft;
     setData(loadDraftLocalStorage);
-    if (loadDraftLocalStorage !== null) {
+    if (
+      loadDraftLocalStorage !== null &&
+      loadDraftLocalStorage !== "" &&
+      loadDraftLocalStorage !== undefined
+    ) {
       let getContentFromDB = convertFromRaw(loadDraftLocalStorage);
       setEditorState(EditorState.createWithContent(getContentFromDB));
     }
@@ -42,27 +47,27 @@ const EditorTools = ({ onSubmitWriteBlog,
   // // upload images and return url
   const uploadImageCallBack = (file) => {
     return new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.open("POST", config.UPLOAD_URL_BACKEND);
-      const data = new FormData();
-      data.append("file", file);
-      data.append("remark", "blog");
-
-      xhr.send(data);
-      xhr.addEventListener("load", () => {
-        const response = JSON.parse(xhr.responseText);
-        const responseUrl = {
-          data: { link: config.BASE_MEDIA + response.file },
-        };
-        resolve(responseUrl);
-      });
-      xhr.addEventListener("error", () => {
-        const error = JSON.parse(xhr.responseText);
-        reject(error);
-      });
+      let storageRef = firebase.storage().ref(`blog/${file.name}`);
+      let resultUpload = storageRef.put(file);
+      resultUpload.on(
+        `state_changed`,
+        (snapshort) => {
+          console.log(snapshort.bytesTransferred, snapshort.totalBytes);
+        },
+        () => {
+  
+        },
+        () => {
+          storageRef.getDownloadURL().then((url) => {
+            const responseUrl = {
+              data: { link: url },
+            };
+            resolve(responseUrl);
+          });
+        }
+      );
     });
   };
-  // upload images and return url
 
   const handleChangeEmbed = (video) => {
     let youtubeId = video.split("https://www.youtube.com/watch?v=");
@@ -71,12 +76,25 @@ const EditorTools = ({ onSubmitWriteBlog,
   };
 
   const SaveToDb = (data) => () => {
-    onSubmitWriteBlog(JSON.stringify(data), dataReducer.userProfile.id, writeBlogPresenter.category, 
-    writeBlogPresenter.title, writeBlogPresenter.subTitle, writeBlogPresenter.imagesCover);
+    onSubmitWriteBlog(
+      JSON.stringify(data),
+      dataReducer.userProfile.id,
+      writeBlogPresenter.category,
+      writeBlogPresenter.title,
+      writeBlogPresenter.subTitle,
+      writeBlogPresenter.imagesCover
+    );
   };
 
   const SaveDraft = (data) => () => {
-    onSubmitSaveDraft(data, dataReducer.userProfile.id, writeBlogPresenter.imagesCover, writeBlogPresenter.title, writeBlogPresenter.subTitle, writeBlogPresenter.category);
+    onSubmitSaveDraft(
+      data,
+      dataReducer.userProfile.id,
+      writeBlogPresenter.imagesCover,
+      writeBlogPresenter.title,
+      writeBlogPresenter.subTitle,
+      writeBlogPresenter.category
+    );
     setIsFetch(true);
   };
   return (
@@ -139,20 +157,22 @@ const EditorTools = ({ onSubmitWriteBlog,
 
         <div className="col-12 my-3">
           <label htmlFor="category">Select your category</label>
-          <select 
-          name="category" 
-          value={writeBlogPresenter.category}
-          onChange={(e)=> handleChangeCategory(e.target.value)}
-          className="form-control" 
-          id="category">
+          <select
+            name="category"
+            value={writeBlogPresenter.category}
+            onChange={(e) => handleChangeCategory(e.target.value)}
+            className="form-control"
+            id="category"
+          >
             <option value={parseInt(0)}>Select your category</option>
-            {
-              writeBlogPresenter.categoryList.category && 
-              writeBlogPresenter.categoryList.category.map((item,index)=> {
-                 return (<option key={index} value={item.id}>{item.name}</option> )
-              })
-            }
-            
+            {writeBlogPresenter.categoryList.category &&
+              writeBlogPresenter.categoryList.category.map((item, index) => {
+                return (
+                  <option key={index} value={item.id}>
+                    {item.name}
+                  </option>
+                );
+              })}
           </select>
         </div>
         <div className="col-12 my-5">
@@ -168,7 +188,7 @@ const EditorTools = ({ onSubmitWriteBlog,
                 "inline",
                 "textAlign",
                 "blockType",
-                'fontSize',
+                "fontSize",
                 "colorPicker",
                 "link",
                 "image",
@@ -186,7 +206,16 @@ const EditorTools = ({ onSubmitWriteBlog,
               },
               blockType: {
                 inDropdown: true,
-                options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Blockquote'],
+                options: [
+                  "Normal",
+                  "H1",
+                  "H2",
+                  "H3",
+                  "H4",
+                  "H5",
+                  "H6",
+                  "Blockquote",
+                ],
                 className: undefined,
                 component: undefined,
                 dropdownClassName: undefined,
