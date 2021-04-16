@@ -59,6 +59,17 @@ export const writeBlogReducer = (
                 }
             }
 
+        case WriteBlogAction.writeBlogReset:
+            return {
+                ...state,
+                contentDraft: "",
+                title: "",
+                subTitle: "",
+                imagesCover: "",
+                category: ""
+
+            }
+
         case BlogCategoryAPI.GetCategorySuccess:
             return {
                 ...state,
@@ -130,7 +141,7 @@ const mapDisPatchToProps = (dispatch: Dispatch) => ({
     handleChangeCover: (event: any) => {
         dispatch({
             type: WriteBlogAction.handleChangeCover,
-            payload: event.data.link
+            payload: event
         })
     },
 
@@ -144,6 +155,7 @@ const mapDisPatchToProps = (dispatch: Dispatch) => ({
     handleSubmitWriteBlog: (content: any, userId: number | string, category: number | string, title: string, subTitle: string, cover: string) => {
         if (userId !== undefined && category !== "" && category != 0 && title.length > 0 && subTitle.length > 0 && cover.length > 0) {
             dispatch(postArticle(content, userId, category, title, subTitle, cover))
+            dispatch({ type: WriteBlogAction.writeBlogReset })
         } else {
             dispatch({
                 type: WriteBlogAction.handlePostStatus,

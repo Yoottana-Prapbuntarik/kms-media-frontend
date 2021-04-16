@@ -20,5 +20,6 @@ export enum WriteBlogAction {
     handleChangeCover = "handleChangeCover",
     handleChangeCategory = "handleChangeCategory",
     loadContentDraft  = "loadContentDraft",
-    handlePostStatus  = "handlePostStatus"
+    handlePostStatus  = "handlePostStatus",
+    writeBlogReset = "writeBlogReset" 
 }
