@@ -1,0 +1,21 @@
+@import "../../public//assets/styles/_variables.scss";
+
+.margin-section-banner {
+    display: flex;
+    padding-top: $padding-between-14;
+    word-break: break-word;
+    width: 100%;
+    align-items: center;
+    color: #fff;
+    min-height: 774px;
+    justify-content: center;
+    padding-bottom: $padding-between-14;
+    background-image: url('/assets/images/banner.png');
+    h3 {
+        font-family: $Prompt-SemiBold;
+    }
+    p {
+        font-family: $Prompt-Regular;
+    }
+
+}

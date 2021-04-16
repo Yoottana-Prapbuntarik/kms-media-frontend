@@ -1,0 +1,80 @@
+@import "../../public/assets/styles/variables.scss";
+
+.continaer-carousel{
+    display: block;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel-caption {
+    h3{ 
+        font-family: $Prompt-SemiBold;
+        font-size: 48px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: -0.6px;
+        color: #ffffff;   
+    }
+    p {
+        font-family: $Prompt-Regular;
+    }
+    position: absolute;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-item{
+    position: relative;
+    top: 0;
+    max-height: 774px;
+    overflow: hidden;
+    img{
+        object-fit:cover;
+    }
+}
+
+.carousel-indicators{
+    li{
+        padding: .15rem .2rem;
+    }
+}
+
+.bg-alpha {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background:rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 991.98px){
+    .carousel-item{
+        position: relative;
+        top: 0;
+        height: 400px;
+        overflow: hidden;
+        img {
+            height:  100%;
+        }
+    }
+    .carousel-caption {
+        justify-content: center;
+        top: 5%;
+        h3{
+            font-size: 15px;
+        }
+        .carousel-caption  {
+            p{
+                font-size: 12px;
+            }
+        }
+    }
+}

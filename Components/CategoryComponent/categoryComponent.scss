@@ -1,0 +1,99 @@
+@import "../../public/assets/styles/variables";
+.wrapper-content-category {
+    width: 100%;
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(3,1fr);
+    
+    .items-in-category {      
+        margin-top: 4rem;
+        .wrapper-image{
+            max-height: 443px;
+            position: relative;
+            overflow: hidden;
+            &:hover {
+                opacity: .75;
+                cursor: pointer;
+                transition: ease .5s;
+            }
+           
+        }
+        .wrapper-button-plus {
+            position: relative;
+            .btn-plus {
+                outline: none !important;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                top: -80px;
+                left: -7px;
+                border-radius: 50%;
+                width: 104px;
+                height: 104px;
+                background: #FFFFFF;
+                box-shadow: 0px 2px 10px 1px rgba(89, 89, 89, 0.25);
+                z-index: 10;
+            }
+        }
+
+        .category-name {
+            color: $orange-light;
+            padding-top: 1rem;
+            font-family: $Prompt-Regular;
+            font-weight: bold;
+        }
+    }
+    
+}
+
+@media (max-width: 1600.98px) {
+    .wrapper-button-plus {
+        position: relative;
+        .btn-plus {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            top: -56px !important;
+            left: -7px;
+            border-radius: 50%;
+            width: 70px !important;
+            height: 70px !important;
+            background: #FFFFFF;
+            box-shadow: 0px 2px 10px 1px rgba(89, 89, 89, 0.25);
+            z-index: 10;
+        }
+    }
+}
+
+@media (max-width: 1024.98px) {
+    .wrapper-content-category {
+        width: 100%;
+        grid-template-columns: repeat(2,1fr);
+        .items-in-category {      
+            margin-top: 1rem;
+        }
+    }
+}
+
+@media (max-width: 600.98px) {
+    .wrapper-content-category {
+        width: 100%;
+        grid-template-columns: 1fr;
+        .items-in-category {      
+            margin-top: 1rem;
+        }
+        .btn-plus {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            top: -35px !important;
+            left: -7px !important;
+            border-radius: 50%;
+            width: 50px !important;
+            height: 50px !important;
+            background: #FFFFFF;
+            box-shadow: 0px 2px 10px 1px rgba(89, 89, 89, 0.25);
+            z-index: 10;
+        }
+    }
+}

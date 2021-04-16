@@ -1,0 +1,53 @@
+@import "../../public/assets/styles/variables";
+.btn-signin {
+    font-family: $Prompt-Regular;
+    width: 100%;
+    height: 67px;
+    border-radius: 5px;
+}
+
+.text-field-signin {
+    width: 100%;
+    height: 70px;
+    border: 1px solid #DADADA;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.wrapper-signin {
+    h5 {
+        font-family: $Prompt-Regular;
+    }
+}
+
+@media (max-width: 1600.98px) {
+    .btn-signin {
+        font-family: $Prompt-Regular;
+        width: 100%;
+        height: 50px;
+        border-radius: 5px;
+    }
+    
+    .text-field-signin {
+        width: 100%;
+        height: 50px;
+        border: 1px solid #DADADA;
+        box-sizing: border-box;
+        border-radius: 5px;
+    }
+}
+
+@media (max-width: 1024.98px) {
+    .btn-signin {
+        width: 100%;
+        height: 50px;
+    }
+    
+    .text-field-signin {
+        width: 100%;
+        height: 50px;
+        border: 1px solid #DADADA;
+        box-sizing: border-box;
+        border-radius: 5px;
+    }
+}

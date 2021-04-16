@@ -1,0 +1,14 @@
+{
+    "config": {
+        "UPLOAD_URL": "https://api.cloudinary.com/v1_1/dzswifsou/image/upload/",    
+        "UPLOAD_URL_BACKEND": "http://localhost:8000/api/upload",
+        "BASE_API": "http://localhost:8000/api/",
+        "BASE_MEDIA": "http://localhost:8000"
+    },
+    "env": {
+        "UPLOAD_URL": "https://api.cloudinary.com/v1_1/dzswifsou/image/upload/",    
+        "UPLOAD_URL_BACKEND": "http://localhost:8000/api/upload",
+        "BASE_API": "http://localhost:8000/api/",
+        "BASE_MEDIA": "http://localhost:8000"
+    }
+}

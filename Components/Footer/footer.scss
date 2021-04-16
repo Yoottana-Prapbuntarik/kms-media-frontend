@@ -1,0 +1,12 @@
+.footer{
+    width: 100%;
+    height: 150px;
+    background-color: #333333;
+}
+.img-icon-social{
+    width: 30px;
+    &:hover{
+        opacity: .5;
+        transition: ease .25s;
+    }
+}
