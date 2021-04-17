@@ -16,7 +16,7 @@ const SigninComponent = ({ signinComponentPresenter,
     IsAsknowledge
 }: any) => {
     useEffect(() => {
-//        getUserData()
+
         if (localStorage.getItem("access-token") !== "" &&
             localStorage.getItem("access-token") !== null) {
             getUserData()
