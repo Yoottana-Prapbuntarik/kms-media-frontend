@@ -1,6 +1,7 @@
 import { connect } from "react-redux"
 import SignupComponent from "./SignupComponent";
 import { reduxForm } from "redux-form";
+import validate from "../../validate/signup/signupValidator";
 import { Dispatch } from "redux";
 import {
     ConfirmPasswordSignup,
@@ -10,7 +11,6 @@ import {
     PasswordSignup,
     PhoneSignup,
     SignupAction,
-    // SignupAction,
     SignupComponentPresenter
 } from "./SignupComponentInterface";
 import { SignupActionAPI, signupAPI } from "../../apis/signupAPIClient";
@@ -109,8 +109,8 @@ export const signupComponentReducer = (
             Router.replace("/signin")
             alert(action.keyMessage)
             return state
-            
-            case SignupActionAPI.SignupFailed:
+
+        case SignupActionAPI.SignupFailed:
             alert(action.keyMessage)
             return state
 
@@ -247,7 +247,7 @@ const mapStateToProps = (state: any) => ({
 const form = reduxForm({
     form: FormManager.SignupForm,
     shouldValidate: () => true,
-    //validate
+    validate
 })(SignupComponent)
 
 export default connect(mapStateToProps, mapDisPatchToProps)(form)

@@ -57,6 +57,9 @@ const DetailCompoent = ({ detailCompoentPresenter, getArticleDetail }) => {
                                     </div>
                                 </div>
                             </div>
+                            <div className="col-12">
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
