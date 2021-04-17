@@ -16,9 +16,10 @@ const SigninComponent = ({ signinComponentPresenter,
     IsAsknowledge
 }: any) => {
     useEffect(() => {
-        getUserData()
+//        getUserData()
         if (localStorage.getItem("access-token") !== "" &&
             localStorage.getItem("access-token") !== null) {
+            getUserData()
             Router.push("/")
         }
     }, [signinComponentPresenter])
