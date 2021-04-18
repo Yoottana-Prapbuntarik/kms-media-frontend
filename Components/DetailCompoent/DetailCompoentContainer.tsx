@@ -1,11 +1,18 @@
 import { connect } from "react-redux";
 import DetailCompoent from "./DetailCompoent";
-import { getArticleDetail, GetArticleAction } from "../../apis/getAllArticle";
+import { FormManager } from "../../manager/FormManager";
+import { commentArticle, getCommentAll, getArticleDetail, GetArticleAction } from "../../apis/getAllArticle";
+import { reduxForm } from "redux-form";
 import {
-    DetailCompoentPresenter
+    DetailCompoentPresenter,
+    CommentField
 } from "./DetailCompoentInterface";
 import { Dispatch } from "redux";
 
+const commentField: CommentField = {
+    name: "comment",
+    value: "fasdfasfasdfadsfasfadsfasdf"
+}
 const detailCompoentPresenter: DetailCompoentPresenter = {
     titleDetail: "",
     detailCover: "",
@@ -15,6 +22,8 @@ const detailCompoentPresenter: DetailCompoentPresenter = {
     },
     category: "",
     detailMarkdown: "",
+    commentField: commentField,
+    commentList: []
 }
 
 export const detailCompoentReducer = (
@@ -32,13 +41,31 @@ export const detailCompoentReducer = (
                 category: action.dataAPI.category.name,
                 author: {
                     userName: action.dataAPI.own_user.first_name + " " + action.dataAPI.own_user.last_name,
-                    userProfile: action.dataAPI.own_user.first_name[0] + "" + action.dataAPI.own_user.last_name[0]
+                    userProfile: action.dataAPI.own_user.first_name[0] + "" + action.dataAPI.own_user.last_name[0],
+                    email: action.dataAPI.own_user.email
                 },
                 detailMarkdown: JSON.parse(action.dataAPI.content)
             }
         case GetArticleAction.getArticleDetailFailed:
+            return state
 
+        case GetArticleAction.commentArticleDetailSuccess:
+            alert("แสดงความคิดเห็นสำเร็จ")
+            return state
+        case GetArticleAction.commentArticleDetailFailed:
+            alert("เกิดข้อผิดพลาดในการแสดงความคิดเห็น")
+            return state
+        case GetArticleAction.getCommentArticleDetailSuccess:
+            return {
+                ...state,
+                commentList: action.dataAPI
+            }
 
+        case GetArticleAction.getArticleDetailFailed:
+            return {
+                ...state,
+                commentList: []
+            }
         default:
             return state
     }
@@ -47,12 +74,28 @@ export const detailCompoentReducer = (
 
 const mapStateToProps = (state: any) => ({
     detailCompoentPresenter: state.detailCompoentReducer,
+    signinComponentPresenter: state.signinComponentReducer
 })
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps) => ({
     getArticleDetail: () => {
         dispatch(getArticleDetail(ownProps.detail))
+    },
+
+    handleSubmitComment:  (owner, userCommentId, commentText: string) => {
+         dispatch(commentArticle(ownProps.detail, userCommentId, commentText, owner))
+    },
+
+    getCommentAll: () => {
+        dispatch(getCommentAll(ownProps.detail))
     }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(DetailCompoent)
+
+const form = reduxForm({
+    form: FormManager.BlogDetail,
+    shouldValidate: () => true,
+    // validate
+})(DetailCompoent)
+
+export default connect(mapStateToProps, mapDispatchToProps)(form)
