@@ -79,7 +79,7 @@ const Navigation = ({ navigationPresenter, signinComponentPresenter, getUserData
                                 })
                             }
                         </Nav>
-                        <Nav className="ml-auto">
+                        <Nav className="mx-auto">
                             <div className="d-flex flex-detect-size-nav  justify-content-around align-items-center">
                                 {
                                     navigationPresenter.social.map((navSocial, idx: number) => {
@@ -99,14 +99,36 @@ const Navigation = ({ navigationPresenter, signinComponentPresenter, getUserData
                                     signinComponentPresenter.userProfile.date_joined !== "" &&
                                         signinComponentPresenter.userProfile.date_joined !== undefined ?
                                         <>
-                                                <a className="nav-link  link-social font-weight-bold text-dark w-180px">
-                                                    Hello, <span className="text-green">{`${signinComponentPresenter.userProfile.first_name === "" ? "Admin" :
-                                                     signinComponentPresenter.userProfile.first_name.toUpperCase()}`}</span>
+                                            <Link href={
+                                                {
+                                                    pathname: "/profile",
+                                                    query: {
+                                                        firstName: signinComponentPresenter.userProfile.first_name,
+                                                        lastName: signinComponentPresenter.userProfile.last_name,
+                                                        uuid: signinComponentPresenter.userProfile.id
+                                                    }
+                                                }
+                                            }>
+                                                <a className="font-weight-bold text-dark user-profile-image">
+                                                    <div className="d-flex justify-content-around align-items-center">
+                                                        <div className="w-25">
+                                                            <div
+                                                                className="d-block user-image">
+                                                                <img
+                                                                    src={signinComponentPresenter.userProfile.image === "" || signinComponentPresenter.userProfile.image === null  ? "/assets/images/default.png": signinComponentPresenter.userProfile.image 
+                                                                    }
+                                                                    alt={signinComponentPresenter.userProfile.first_name} />
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            Hello, <span className="text-green">{`${signinComponentPresenter.userProfile.first_name === "" ? "Admin" :
+                                                                signinComponentPresenter.userProfile.first_name.toUpperCase()}`}</span>
+                                                        </div>
+                                                    </div>
                                                 </a>
-                                                <a className="nav-link  link-social w-140px"  onClick={() => logout()}>Sign out</a>
-
-                                        </>
-                                        :
+                                            </Link>
+                                            <a className="nav-link  link-social w-140px" onClick={() => logout()}>Sign out</a>
+                                        </> :
                                         <>
                                             <Link href={"/signin"}>
                                                 <a className="nav-link link-navbar">

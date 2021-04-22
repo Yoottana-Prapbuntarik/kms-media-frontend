@@ -7,4 +7,12 @@ export enum KeyManager {
     PhoneSignup = 'phoneSignup',
     PasswordSignup = 'passwordSignup',
     ConfirmPasswordSignup = 'confirmPasswordSignup',
+
+    ImageUserProfile = 'imageUserProfile',
+    FirstNameProfile = 'firstNameProfile',
+    LastNameProfile = 'lastNameProfile',
+    MobileProfile = 'mobileProfile',
+    OldPasswordProfile = 'oldPasswordProfile',
+    NewPasswordProfile = 'newPasswordProfile',
+    ConfirmNewPasswordProfile = 'confirmNewPasswordProfile',
 }
