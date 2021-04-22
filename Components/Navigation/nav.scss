@@ -10,8 +10,17 @@
 .text-green {
     color: #2AB473;
 }
-.w-180px {
-    width: 180px !important;
+.user-profile-image {
+    width: 300px !important;
+    position: relative;
+    overflow: hidden;
+    .user-image {
+        max-height: 75px;
+        img {
+            width: 80%;
+            border-radius: 5%;
+        }
+    }
 }
 .w-140px {
     width: 140px !important;
@@ -22,6 +31,7 @@
 .position-nav-relative {
     position: relative !important;
 }
+
 .nav-custome{
     z-index: 100;
     width: 100%;
@@ -72,6 +82,7 @@
     flex-direction: row !important;
 }
 
+
 @media (max-width: 1600.98px){
     .img-logo{
         width: 100%
@@ -91,6 +102,16 @@
 }
 
 @media (max-width: 1024.98px){
+
+    .user-profile-image .d-flex  {
+        flex-direction: column !important;
+    }
+    .user-image {
+        margin-bottom: 2rem;
+        img {
+            width: 75% !important;
+        }
+    }
     .flex-detect-size-nav {
         flex-direction: column !important;
     }

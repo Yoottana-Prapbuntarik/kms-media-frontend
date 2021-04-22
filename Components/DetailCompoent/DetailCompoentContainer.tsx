@@ -2,17 +2,19 @@ import { connect } from "react-redux";
 import DetailCompoent from "./DetailCompoent";
 import { FormManager } from "../../manager/FormManager";
 import { commentArticle, getCommentAll, getArticleDetail, GetArticleAction } from "../../apis/getAllArticle";
-import { reduxForm } from "redux-form";
+import { reduxForm, reset } from "redux-form";
 import {
     DetailCompoentPresenter,
+    DetailComponentAction,
     CommentField
 } from "./DetailCompoentInterface";
 import { Dispatch } from "redux";
 
 const commentField: CommentField = {
     name: "comment",
-    value: "fasdfasfasdfadsfasfadsfasdf"
+    value: ""
 }
+
 const detailCompoentPresenter: DetailCompoentPresenter = {
     titleDetail: "",
     detailCover: "",
@@ -23,7 +25,9 @@ const detailCompoentPresenter: DetailCompoentPresenter = {
     category: "",
     detailMarkdown: "",
     commentField: commentField,
-    commentList: []
+    commentList: [],
+    isCommentStatus: null,
+    isCommentMessage: ""
 }
 
 export const detailCompoentReducer = (
@@ -32,8 +36,6 @@ export const detailCompoentReducer = (
 ) => {
     switch (action.type) {
         case GetArticleAction.getArticleDetailSuccess:
-            // author: {
-
             return {
                 ...state,
                 titleDetail: action.dataAPI.title,
@@ -49,12 +51,29 @@ export const detailCompoentReducer = (
         case GetArticleAction.getArticleDetailFailed:
             return state
 
-        case GetArticleAction.commentArticleDetailSuccess:
-            alert("แสดงความคิดเห็นสำเร็จ")
-            return state
-        case GetArticleAction.commentArticleDetailFailed:
-            alert("เกิดข้อผิดพลาดในการแสดงความคิดเห็น")
-            return state
+        case DetailComponentAction.askknowledgeErrorComment:
+            return {
+                ...state,
+                isCommentStatus: action.payload,
+                isCommentMessage: action.message
+            }
+            
+            case GetArticleAction.commentArticleDetailSuccess:
+            return {
+                ...state,
+                isCommentStatus: 200,
+                isCommentMessage: "Comment Successfully!"
+            }
+            
+
+            case GetArticleAction.commentArticleDetailFailed:
+            
+            return {
+                ...state,
+                isCommentStatus: 401,
+                isCommentMessage: "Comment Falied! Please please signin or check information comment."
+            }
+            
         case GetArticleAction.getCommentArticleDetailSuccess:
             return {
                 ...state,
@@ -82,12 +101,20 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps) => ({
         dispatch(getArticleDetail(ownProps.detail))
     },
 
-    handleSubmitComment:  (owner, userCommentId, commentText: string) => {
-         dispatch(commentArticle(ownProps.detail, userCommentId, commentText, owner))
+    handleSubmitComment: (owner, userCommentId, commentText: string) => {
+        dispatch(commentArticle(ownProps.detail, userCommentId, commentText, owner))
     },
 
     getCommentAll: () => {
         dispatch(getCommentAll(ownProps.detail))
+    },
+    asknowledge: () => {
+        dispatch({
+            type: DetailComponentAction.askknowledgeErrorComment,
+            payload: null,
+            message: ""
+        })
+        dispatch(reset(FormManager.BlogDetail))
     }
 })
 

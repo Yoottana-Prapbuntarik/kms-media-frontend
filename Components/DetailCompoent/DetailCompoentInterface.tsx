@@ -9,5 +9,11 @@ export interface DetailCompoentPresenter {
     category: string;
     detailMarkdown: string;
     commentField: CommentField;
-    commentList: Array<any> 
+    commentList: Array<any>;
+    isCommentStatus: boolean;
+    isCommentMessage: string;
+}
+
+export enum DetailComponentAction {
+    askknowledgeErrorComment =  "askknowledgeErrorComment"
 }

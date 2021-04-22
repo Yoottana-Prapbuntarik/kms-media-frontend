@@ -1,0 +1,74 @@
+import { Dispatch } from 'redux'
+import { serviceToken } from "./baseAPI";
+export enum UserProfileAction {
+  getUserProfileSuccess = 'getUserProfileSuccess',
+  getUserProfileFailed = 'getUserProfileFailed',
+  upateProfileSuccess = 'updateProfileSuccess',
+  updateProfileFailed = 'updateProfileFailed',
+
+}
+
+export const getUserProfile: any = (firstName: string, lastName: string, id: number | string) => async (dispatch: Dispatch) => {
+  serviceToken({
+    method: 'get',
+    url: `auth/profile/${firstName}/${lastName}/${id}`,
+  })
+    .then((response) => {
+      if (response) {
+        dispatch({
+          type: UserProfileAction.getUserProfileSuccess,
+          dataAPI: response.data[0],
+        })
+      }
+    })
+    .catch((error) => {
+      if (error) {
+        dispatch({
+          type: UserProfileAction.getUserProfileFailed,
+        })
+      }
+    })
+}
+
+export const updateUserProfile: any = (mobile: string, firstName: string, lastName: string, image, id: number | string) => async (dispatch: Dispatch) => {
+    serviceToken({
+      method: 'patch',
+      url: `auth/profile/${id}/update`,
+      data: params(
+        mobile,
+        firstName,
+        lastName,
+        image
+      )
+    })
+      .then((response) => {
+        if (response) {
+          dispatch({
+            type: UserProfileAction.upateProfileSuccess,
+            dataAPI: response.data,
+            key_message: "Save Data Successfully"
+          })
+        }
+      })
+      .catch((error) => {
+        if (error) {
+          dispatch({
+            type: UserProfileAction.updateProfileFailed,
+          })
+        }
+      })
+  }
+
+const params = (
+  mobile: string,
+  firstName: string,
+  lastName: string,
+  image: string
+) => {
+  return {
+    mobile: mobile,
+    first_name: firstName,
+    last_name: lastName,
+    image: image
+  }
+}

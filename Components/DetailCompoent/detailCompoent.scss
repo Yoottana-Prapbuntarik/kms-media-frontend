@@ -6,6 +6,22 @@
          width: 100%;
      }
 }
+.user-profile-images {
+    position: relative;
+    height: 100px;
+    width: 100px;
+    background: #eeeeee;
+    border-radius: 50%;
+    padding: .75rem;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    text-align: center;
+    overflow: hidden;
+}
+.border-comment {
+    border-left: 1px solid #C4C4C4;
+}
 
 .wrapper-like {
     position: relative;
@@ -42,4 +58,15 @@
     border-radius: 50%;
     display: flex;
     align-items: center;
+}
+
+
+@media (max-width: 1024.98px)  {
+    .border-comment {
+        border-left: none;
+        border-top: 1px solid #C4C4C4 !important;
+    }    
+    .border-comment {
+        border: none;
+    }    
 }
