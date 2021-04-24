@@ -36,6 +36,7 @@ export const detailCompoentReducer = (
 ) => {
     switch (action.type) {
         case GetArticleAction.getArticleDetailSuccess:
+            console.log(`action.dataAPI`, action.dataAPI)
             return {
                 ...state,
                 titleDetail: action.dataAPI.title,
@@ -43,7 +44,7 @@ export const detailCompoentReducer = (
                 category: action.dataAPI.category.name,
                 author: {
                     userName: action.dataAPI.own_user.first_name + " " + action.dataAPI.own_user.last_name,
-                    userProfile: action.dataAPI.own_user.first_name[0] + "" + action.dataAPI.own_user.last_name[0],
+                    userProfile: action.dataAPI.own_user.image,
                     email: action.dataAPI.own_user.email
                 },
                 detailMarkdown: JSON.parse(action.dataAPI.content)

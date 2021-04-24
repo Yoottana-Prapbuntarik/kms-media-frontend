@@ -76,8 +76,8 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
                         <div className="row">
                             <div className="col-12 py-5">
                                 <div className="d-flex h-100  align-items-center  flex-wrap">
-                                    <div className="border p-3 rounded">
-                                        {detailCompoentPresenter.author.userProfile.toUpperCase()}
+                                    <div className="border  wrapper-image-owner">
+                                        <img  className=" rounded profile-user-owner" src={detailCompoentPresenter.author.userProfile} alt=""/>
                                     </div>
                                     <div className="px-3 text-secondary">
                                         {detailCompoentPresenter.author.userName}
