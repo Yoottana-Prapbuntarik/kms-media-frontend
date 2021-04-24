@@ -1,3 +1,11 @@
+.wrapper-image-owner {
+    max-height: 100px;
+    position: relative;
+    overflow: hidden;
+    .profile-user-owner {
+        width: 100px;
+    }
+}
 .cover-detail{
      position: relative;
      max-height: 513px;
