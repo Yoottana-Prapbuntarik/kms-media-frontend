@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Field } from "redux-form";
 import TextAreaField from "../FieldComponents/TextAreaField"
 import SweetAlert from "react-bootstrap-sweetalert";
-
+import Head from "next/head";
 const BlogDetail = dynamic(() => import('../Editor/blogDetail'), { ssr: false })
 
 const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, signinComponentPresenter, getArticleDetail, handleSubmitComment, handleSubmit }) => {
@@ -27,6 +27,17 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
 
     return (
         <div className="container ">
+            <Head>
+                {/* <meta property="og:url" content="{{ request.build_absolute_uri }}" /> */}
+                <meta property="og:title" content={detailCompoentPresenter.titleDetail} />
+                <meta property="og:description" content={detailCompoentPresenter.sub_title} />
+                {/* <meta property="og:site_name" content="{% lz 'SEO_SITE_NAME' %}"/> */}
+                <meta property="og:image" content={detailCompoentPresenter.detailCover} />
+                <meta property="og:type" content="website" />
+                <meta name="robots" content="noodp" />
+                <meta itemProp="image" content={detailCompoentPresenter.detailCover} />
+
+            </Head>
             { detailCompoentPresenter.isCommentStatus === 200 ?
                 < SweetAlert
                     custom
@@ -53,7 +64,7 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
                     onConfirm={() => asknowledge()}
                 >
                 </SweetAlert>
-                }
+            }
             <div className="row">
                 <div className="col-12 mt-3 text-center">
                     <h3>{detailCompoentPresenter.titleDetail}</h3>
@@ -77,7 +88,7 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
                             <div className="col-12 py-5">
                                 <div className="d-flex h-100  align-items-center  flex-wrap">
                                     <div className="border  wrapper-image-owner">
-                                        <img  className=" rounded profile-user-owner" src={detailCompoentPresenter.author.userProfile} alt=""/>
+                                        <img className=" rounded profile-user-owner" src={detailCompoentPresenter.author.userProfile} alt="" />
                                     </div>
                                     <div className="px-3 text-secondary">
                                         {detailCompoentPresenter.author.userName}
