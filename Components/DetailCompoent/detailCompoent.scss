@@ -28,13 +28,16 @@
     overflow: hidden;
 }
 .border-comment {
-    border-left: 1px solid #C4C4C4;
+    background: #C4C4C4;
+    height: 75%;
+    width: 1px;
 }
 
 .wrapper-like {
     position: relative;
     bottom: 50px;
-    left: -10px;
+    left: 5%;
+    // left: -10px;
     .like {
         position: absolute;
         flex-direction: column;
@@ -71,10 +74,8 @@
 
 @media (max-width: 1024.98px)  {
     .border-comment {
-        border-left: none;
-        border-top: 1px solid #C4C4C4 !important;
-    }    
-    .border-comment {
-        border: none;
+        background: #C4C4C4;
+        height: 1px;
+        width: 75%;
     }    
 }

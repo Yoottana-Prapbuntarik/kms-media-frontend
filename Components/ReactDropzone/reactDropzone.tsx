@@ -47,18 +47,19 @@ const ReactDropzone = ({ handleChangeCover, currentImages }) => {
             <div {...getRootProps()} className="border d-flex align-items-center justify-content-center my-5">
                 <div className="d-block padding-dropzone">
                     <input {...getInputProps()} />
-                    <h5 className="text-center">
-                        Cover
+                    <div>{images.length !== 0 ? images :
+                        currentImages.imagesCover !== "" ?
+                            <img src={currentImages.imagesCover} style={{ width: "100%", display: "block", margin: "0 auto" }} alt="preview" />
+                            :
+                            ""
+                    }</div>
+                    <h5 className="text-center mt-5">
+                        Cover Image
                     </h5>
                     <br />
-                    <p className="lead">Upload | Drag and Drop</p>
+                    <p className="lead text-center">Upload | Drag and Drop</p>
                 </div>
             </div>
-            <div>{images.length !== 0 ? images :
-                currentImages.imagesCover !== "" ?
-                    <img src={currentImages.imagesCover} style={{ width: "100%", display: "block", margin: "0 auto" }} alt="preview" /> :
-                    ""
-            }</div>
         </section>
     )
 }

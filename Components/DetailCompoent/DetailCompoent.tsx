@@ -134,9 +134,9 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
                                 detailCompoentPresenter.commentList.map((item, index: number) => {
                                     return (
 
-                                        <div key={index} className="col-12  px-2 my-5 bg-light">
+                                        <div key={index} className="col-12  px-2 my-3 py-3 bg-light">
                                             <div className="row">
-                                                <div className="col-lg-3 col-12 py-3 min-h-100 d-flex justify-content-center align-items-center text-left p-0">
+                                                <div className="col-lg-2 col-12 py-3 min-h-100 d-flex justify-content-center align-items-center text-left p-0">
                                                     <div className="wraper-profile-image">
                                                         <div className="user-profile-images">
                                                             <div className="d-block w-100">
@@ -146,20 +146,23 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className=" border-comment col-lg-9 flex-column col-12 d-flex justify-content-between w-100  py-5 align-items-between p-0">
+                                                
+                                                <div className="col-lg-1 flex-column  col-12 d-flex justify-content-center w-100  py-2 align-items-center p-0">
+                                                <div className="border-comment"></div>
+                                                </div>
+                                                <div className="  col-lg-9 flex-column col-12 d-flex justify-content-between w-100  py-2 align-items-between p-0">
                                                     <div className="row mx-auto text-center  w-100 px-3">
-                                                        <div className="mb-5 col-lg-8 col-12 
-                                                        d-flex justify-content-xl-start 
-                                                        justify-content-md-center 
-                                                        justify-content-sm-center 
-                                                        justify-content-center 
+                                                        <div className="col-lg-8 col-12 
+                                                        justify-content-start
                                                         w-100"
                                                         >
-                                                            <div className="  d-flex text-left my-2">
+                                                            <div className="d-flex text-left my-2">
+                                                                <h4>
                                                                 {item.user_comment.first_name} {item.user_comment.last_name}
+                                                                </h4>
                                                             </div>
                                                         </div>
-                                                        <div className="mb-5 col-lg-4 col-12 justify-content-center w-100 d-flex">
+                                                        <div className="col-lg-4 col-12 justify-content-center w-100 d-flex">
                                                             <div className="d-flex  flex-row text-right my-2">
                                                                 <div>
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" fill="currentColor" className="bi bi-clock-fill" viewBox="0 0 16 16">
@@ -171,9 +174,9 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="mt-5">
+                                                    <div className="col-lg-8 text-left text-break">
                                                         {item.content}
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>

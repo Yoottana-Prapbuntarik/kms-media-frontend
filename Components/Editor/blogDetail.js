@@ -3,6 +3,7 @@ import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
 import draftToMarkdown from "draftjs-to-markdown";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import ReactMarkdownWithHtml from "react-markdown/with-html";
+import "./blog-detail.scss";
 
 const previewProductDetail = ({ detailBlog }) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());

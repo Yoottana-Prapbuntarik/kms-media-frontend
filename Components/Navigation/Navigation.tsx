@@ -32,7 +32,7 @@ const Navigation = ({ navigationPresenter, signinComponentPresenter, getUserData
                     <div className="h-100 d-flex align-items-center w-25">
                         <Link href="/" passHref>
                             <Navbar.Brand >
-                                Logo
+                                <img src="/assets/images/logo/logo-media.png" alt="Media kmutt"/>
                             </Navbar.Brand>
                         </Link>
                     </div>
@@ -135,7 +135,7 @@ const Navigation = ({ navigationPresenter, signinComponentPresenter, getUserData
                                                     Sign in
                                                 </a>
                                             </Link>
-
+                                               |
                                             <Link href={"/signup"}>
                                                 <a className="nav-link link-navbar">
                                                     Sign up

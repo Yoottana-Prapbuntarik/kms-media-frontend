@@ -1,6 +1,4 @@
-import CardContent from "../CardContent/CardContent";
 import Carousel from "../Carousel/Carousel";
-import Link from "next/link";
 import PaginationContainer from "../Pagegination/PaginationContainer";
 import { useEffect } from "react";
 
@@ -27,7 +25,7 @@ const Home = ({ homePresenter, getArticle }: any) => {
                             <PaginationContainer data={homePresenter.allArticle} title={''} itemsPerPage={6} />
                         </div>
                     </div>
-                    <div className="row">
+                    {/* <div className="row">
                         <div className="col-12 padding-section-between-6">
                             <div className="row padding-170px">
                                 <div className="col-lg-6 d-flex flex-column align-items-start">
@@ -90,7 +88,7 @@ const Home = ({ homePresenter, getArticle }: any) => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

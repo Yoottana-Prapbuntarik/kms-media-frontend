@@ -8,7 +8,7 @@ const Detail = () => {
         <MainLayout>
             <Head>
                 <title>
-                    Detail Article
+                    รายละเอียดบทความ
                 </title>
             </Head>
             <DetailComponent detail={router.query.content}/>

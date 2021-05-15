@@ -21,7 +21,8 @@ const navigationItems: NavigationItems[] = [
 
     {
         keyTitle: 'News',
-        routePath: '/news'
+        routePath: '#'
+        // routePath: '/news'
     },
 
     {
