@@ -19,7 +19,7 @@ const previewProductDetail = ({ detailBlog }) => {
   return (
     <div className="container my-5">
       <div className="row">
-        <div className="col-12 my-5 demo-content">
+        <div className="col-12 demo-content">
           <ReactMarkdownWithHtml
             children={draftToMarkdown(
               convertToRaw(editorState.getCurrentContent())

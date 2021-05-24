@@ -1,184 +1,53 @@
 import Link from "next/link";
 import "./categoryComponent.scss";
 const CategoryComponent = ({
-    categoryComponentPresenter
+    categoryComponentPresenter,
+    categoryItem
 }: any) => {
     return (
         <div className="wrapper-content-category mb-5">
-            <div className="items-in-category">
-                <Link href="/detail">
-                    <a>
-                        <div className="wrapper-image">
-                            <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" className="w-100" alt="" />
+            {
+                categoryItem.map((item, index: number) => {
+                    return (
+                        <div className="items-in-category" key={index}>
+                            <Link href={
+                                {
+                                    pathname: "/category-content",
+                                    query: {
+                                        id: item.id
+                                    }
+                                }
+                            }>
+                                <a>
+                                    <div className="wrapper-image text-center">
+                                        <img src={item.cate_image} className="w-100" alt="" />
+                                    </div>
+                                </a>
+                            </Link>
+                            <div className="wrapper-button-plus mb-3">
+                                <button className="btn-plus">
+                                    <svg xmlns="http://www.w3.org/2000/svg" 
+                                    width="0.75rem"  
+                                    fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
+                                        <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <h4 className="category-name text-left mt-3">
+                                {item.name}
+                            </h4>
+                            {/* <h1 className="text-center">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto atque quas eligendi saepe veritatis. Praesentium tempora esse iusto iure quas voluptates quisquam, officia veritatis, fugiat assumenda quo suscipit deserunt. Doloribus.
+                            </h1>
+                            <div className="d-flex">
+                                <div className="text-secondary">
+                                    John Doh    November , 8 , 2019
+                                </div>
+                            </div> */}
                         </div>
-                    </a>
-                </Link>
-                <div className="wrapper-button-plus mb-3">
-                    <button className="btn-plus">
-                        +
-                </button>
-                </div>
-                <p className="category-name">
-                    Development
-                </p>
-                <p>
-                    5 Amazing Places To Visit In Summer
-                </p>
-                <p className="text-muted">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto atque quas eligendi saepe veritatis. Praesentium tempora esse iusto iure quas voluptates quisquam, officia veritatis, fugiat assumenda quo suscipit deserunt. Doloribus.
-                </p>
-                <div className="d-flex">
-                    <div className="text-secondary">
-                        John Doh    November , 8 , 2019
-                    </div>
-                </div>
-            </div>            
-            
-            <div className="items-in-category">
-                <Link href="/detail">
-                    <a>
-                        <div className="wrapper-image">
-                            <img src="https://images.unsplash.com/photo-1572044162444-ad60f128bdea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" className="w-100" alt="" />
-                        </div>
-                    </a>
-                </Link>
-                <div className="wrapper-button-plus mb-3">
-                    <button className="btn-plus">
-                        +
-                </button>
-                </div>
-                <p className="category-name">
-                    Designer
-                </p>
-                <p>
-                    5 Amazing Places To Visit In Summer
-                </p>
-                <p className="text-muted">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto atque quas eligendi saepe veritatis. Praesentium tempora esse iusto iure quas voluptates quisquam, officia veritatis, fugiat assumenda quo suscipit deserunt. Doloribus.
-                </p>
-                <div className="d-flex">
-                    <div className="text-secondary">
-                        John Doh    November , 8 , 2019
-                    </div>
-                </div>
-            </div>            
-
-            <div className="items-in-category">
-                <Link href="/detail">
-                    <a>
-                        <div className="wrapper-image">
-                            <img src="https://images.unsplash.com/photo-1524749292158-7540c2494485?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" className="w-100" alt="" />
-                        </div>
-                    </a>
-                </Link>
-                <div className="wrapper-button-plus mb-3">
-                    <button className="btn-plus">
-                        +
-                </button>
-                </div>
-                <p className="category-name">
-                    Business
-                </p>
-                <p>
-                    5 Amazing Places To Visit In Summer
-                </p>
-                <p className="text-muted">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto atque quas eligendi saepe veritatis. Praesentium tempora esse iusto iure quas voluptates quisquam, officia veritatis, fugiat assumenda quo suscipit deserunt. Doloribus.
-                </p>
-                <div className="d-flex">
-                    <div className="text-secondary">
-                        John Doh    November , 8 , 2019
-                    </div>
-                </div>
-            </div>            
-            
-            <div className="items-in-category">
-                <Link href="/detail">
-                    <a>
-                        <div className="wrapper-image">
-                            <img src="https://images.unsplash.com/photo-1502068898470-ad70c83938be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80" className="w-100" alt="" />
-                        </div>
-                    </a>
-                </Link>
-                <div className="wrapper-button-plus mb-3">
-                    <button className="btn-plus">
-                        +
-                </button>
-                </div>
-                <p className="category-name">
-                    Machanical
-                </p>
-                <p>
-                    5 Amazing Places To Visit In Summer
-                </p>
-                <p className="text-muted">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto atque quas eligendi saepe veritatis. Praesentium tempora esse iusto iure quas voluptates quisquam, officia veritatis, fugiat assumenda quo suscipit deserunt. Doloribus.
-                </p>
-                <div className="d-flex">
-                    <div className="text-secondary">
-                        John Doh    November , 8 , 2019
-                    </div>
-                </div>
-            </div>            
-            
-            <div className="items-in-category">
-                <Link href="/detail">
-                    <a>
-                        <div className="wrapper-image">
-                            <img src="https://images.unsplash.com/photo-1506097425191-7ad538b29cef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" className="w-100" alt="" />
-                        </div>
-                    </a>
-                </Link>
-                <div className="wrapper-button-plus mb-3">
-                    <button className="btn-plus">
-                        +
-                </button>
-                </div>
-                <p className="category-name">
-                    Machanical
-                </p>
-                <p>
-                    5 Amazing Places To Visit In Summer
-                </p>
-                <p className="text-muted">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto atque quas eligendi saepe veritatis. Praesentium tempora esse iusto iure quas voluptates quisquam, officia veritatis, fugiat assumenda quo suscipit deserunt. Doloribus.
-                </p>
-                <div className="d-flex">
-                    <div className="text-secondary">
-                        John Doh    November , 8 , 2019
-                    </div>
-                </div>
-            </div>            
-
-
-            <div className="items-in-category">
-                <Link href="/detail">
-                    <a>
-                        <div className="wrapper-image">
-                            <img src="https://images.unsplash.com/photo-1516534775068-ba3e7458af70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" className="w-100" alt="" />
-                        </div>
-                    </a>
-                </Link>
-                <div className="wrapper-button-plus mb-3">
-                    <button className="btn-plus">
-                        +
-                </button>
-                </div>
-                <p className="category-name">
-                    Creative
-                </p>
-                <p>
-                    5 Amazing Places To Visit In Summer
-                </p>
-                <p className="text-muted">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto atque quas eligendi saepe veritatis. Praesentium tempora esse iusto iure quas voluptates quisquam, officia veritatis, fugiat assumenda quo suscipit deserunt. Doloribus.
-                </p>
-                <div className="d-flex">
-                    <div className="text-secondary">
-                        John Doh    November , 8 , 2019
-                    </div>
-                </div>
-            </div>            
+                    )
+                })
+            }
         </div>
     )
 }

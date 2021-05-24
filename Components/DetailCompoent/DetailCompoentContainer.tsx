@@ -36,7 +36,6 @@ export const detailCompoentReducer = (
 ) => {
     switch (action.type) {
         case GetArticleAction.getArticleDetailSuccess:
-            console.log(`action.dataAPI`, action.dataAPI)
             return {
                 ...state,
                 titleDetail: action.dataAPI.title,

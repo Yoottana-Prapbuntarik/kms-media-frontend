@@ -101,7 +101,7 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
                                     <div className="px-3 text-secondary">
                                         {detailCompoentPresenter.category}
                                     </div>
-                                    <div className="col-12 mb-5 mt-5">
+                                    <div className="col-12 mb-5">
                                         <BlogDetail detailBlog={detailBlog} />
                                     </div>
                                 </div>

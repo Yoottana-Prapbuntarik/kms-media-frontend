@@ -1,22 +1,23 @@
-import MainLayout from "../layouts/MainLayout";
-require('isomorphic-fetch');
 import { env } from "../config-project.json";
+require('isomorphic-fetch');
+import MainLayout from "../layouts/MainLayout";
 import Head from "next/head";
-import Home from "../Components/Home/HomeContainer";
-const Index = ({data}) => {
+import News from "../Components/News/News";
+const New = ({data}) => {
   return (
     <MainLayout>
       <Head>
         <title>
-          KMS
+          ข่าวสาร
         </title>
       </Head>
-        <Home sliderData={data.news}/>
+      <News content={data.news}/>
     </MainLayout>
 
   )
 }
-Index.getInitialProps = async () => {
+
+New.getInitialProps = async () => {
   const res = await fetch(`${env.BASE_API}news`)
   const data = await res.json()
   const jsonData = data
@@ -24,4 +25,4 @@ Index.getInitialProps = async () => {
       data: jsonData
   }
 }
-export default Index;
+export default New;
