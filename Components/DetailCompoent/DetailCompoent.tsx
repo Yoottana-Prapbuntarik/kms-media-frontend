@@ -25,17 +25,17 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
     }
 
     const likeFunc = (blogId, user) => {
-        return new Promise((resolve, reject)=> {
+        return new Promise((resolve, reject) => {
             resolve(likeArticle(blogId, user))
         }).then(res => {
-            setTimeout(() => { 
+            setTimeout(() => {
                 getArticleDetail()
             }, 100);
         })
     }
 
     return (
-        <div className="container ">
+        <div className="container bg-white">
             <Head>
                 <meta property="og:title" content={detailCompoentPresenter.titleDetail} />
                 <meta property="og:description" content={detailCompoentPresenter.sub_title} />
@@ -75,9 +75,6 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
                 </SweetAlert>
             }
             <div className="row detail-comment">
-                <div className="col-12 mt-3 text-center">
-                    <h3>{detailCompoentPresenter.titleDetail}</h3>
-                </div>
                 <div className="col-12 mt-5 text-center">
                     <div className="cover-detail">
                         <img src={detailCompoentPresenter.detailCover} alt="Cover detail" />
@@ -91,6 +88,9 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
                                 <div className="text-like  w-100 text-center">{detailCompoentPresenter.likeAmount}</div>
                             </div>
                         </div>
+                    </div>
+                    <div className="col-12 mt-5 text-center">
+                        <h1>{detailCompoentPresenter.titleDetail}</h1>
                     </div>
                     <div className="cotnainer mb-5">
                         <div className="row">
@@ -145,7 +145,7 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
 
                                         <div key={index} className="col-12  px-2 my-3 py-3 bg-light">
                                             <div className="row">
-                                                <div className="col-lg-2 col-12 py-3 min-h-100 d-flex justify-content-center align-items-center text-left p-0">
+                                                <div className="col-lg-2 border-right  col-12 py-3 min-h-100 d-flex justify-content-center align-items-start text-left p-0">
                                                     <div className="wraper-profile-image">
                                                         <div className="user-profile-images">
                                                             <div className="d-block w-100">
@@ -156,30 +156,30 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
                                                     </div>
                                                 </div>
 
-                                                <div className="col-lg-1 flex-column  col-12 d-flex justify-content-center w-100  py-2 align-items-center p-0">
+                                                {/* <div className="col-lg-1 flex-column  col-12 d-flex justify-content-start w-100  py-2 align-items-start p-0">
                                                     <div className="border-comment"></div>
-                                                </div>
-                                                <div className="  col-lg-9 flex-column col-12 d-flex justify-content-between w-100  py-2 align-items-between p-0">
+                                                </div> */}
+                                                <div className="  col-lg-10 flex-column col-12 d-flex justify-content-between w-100  py-2 align-items-between p-0">
                                                     <div className="row mx-auto text-center  w-100 px-3">
                                                         <div className="col-lg-8 col-12 
                                                         justify-content-start
                                                         w-100"
                                                         >
-                                                            <div className="d-flex text-left my-2">
-                                                                <h4>
+                                                            <div className="d-flex text-left my-2 justify-center-responsive">
+                                                                <h4 className="pt-0">
                                                                     {item.user_comment.first_name} {item.user_comment.last_name}
                                                                 </h4>
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-4 col-12 justify-content-center w-100 d-flex">
-                                                            <div className="d-flex  flex-row text-right my-2">
+                                                            <div className="d-flex  flex-row text-right my-2 align-items-center">
                                                                 <div>
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" fill="currentColor" className="bi bi-clock-fill" viewBox="0 0 16 16">
                                                                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
                                                                     </svg>
                                                                 </div>
                                                                 <div className="ml-3">
-                                                                    <p>{item.published.slice(0, 10)} {item.published.slice(11, 19)}</p>
+                                                                    <p className="pt-3">{item.published.slice(0, 10)} {item.published.slice(11, 19)}</p>
                                                                 </div>
                                                             </div>
                                                         </div>

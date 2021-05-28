@@ -77,7 +77,13 @@
 }
 
 
+.justify-center-responsive {
+    justify-content: flex-start;
+}
 @media (max-width: 1024.98px)  {
+    .justify-center-responsive {
+        justify-content: center;
+    }
     .border-comment {
         background: #C4C4C4;
         height: 1px;

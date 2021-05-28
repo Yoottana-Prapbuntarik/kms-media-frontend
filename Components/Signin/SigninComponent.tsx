@@ -91,7 +91,7 @@ const SigninComponent = ({ signinComponentPresenter,
                                                 type="submit"
                                                 style="w-100 text-white mt-2 btn-signin bg-green-dark"
                                                 component={ButtonSubmit}
-                                                label={signinComponentPresenter.labelSignin}
+                                                label={"Sign in"}
                                             />
                                         </div>
                                         <div className="col-10 mb-3">
