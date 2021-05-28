@@ -14,6 +14,7 @@ const CategoryComponent = ({
                                 {
                                     pathname: "/category-content",
                                     query: {
+                                        name: item.name,
                                         id: item.id
                                     }
                                 }
@@ -24,7 +25,7 @@ const CategoryComponent = ({
                                     </div>
                                 </a>
                             </Link>
-                            <div className="wrapper-button-plus mb-3">
+                            {/* <div className="wrapper-button-plus mb-3">
                                 <button className="btn-plus">
                                     <svg xmlns="http://www.w3.org/2000/svg" 
                                     width="0.75rem"  
@@ -32,7 +33,7 @@ const CategoryComponent = ({
                                         <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
                                     </svg>
                                 </button>
-                            </div>
+                            </div> */}
                             <h4 className="category-name text-left mt-3">
                                 {item.name}
                             </h4>

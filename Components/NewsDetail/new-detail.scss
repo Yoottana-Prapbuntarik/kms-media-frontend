@@ -2,4 +2,28 @@
     line-height: 2rem;
     font-size: 20px;
     font-weight: normal !important;
+    word-wrap: break-word;
+}
+
+.img-cover-new{
+    width: 75%;
+}
+.new-detail {
+    a {
+        word-wrap: break-word;
+    }
+}
+@media (max-width: 1024.98px) {
+    .img-cover-new {
+        width: 100%;
+    }
+    .new-detail {
+        h1{
+            font-size: 30px;
+        }
+        p {
+            font-size: 18px;
+        }
+
+    }
 }
