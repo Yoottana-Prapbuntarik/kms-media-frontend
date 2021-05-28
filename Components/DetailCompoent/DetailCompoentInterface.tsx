@@ -12,6 +12,8 @@ export interface DetailCompoentPresenter {
     commentList: Array<any>;
     isCommentStatus: boolean;
     isCommentMessage: string;
+    likeAmount: string|number;
+    blogId: string|number;
 }
 
 export enum DetailComponentAction {

@@ -7,7 +7,7 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import Head from "next/head";
 const BlogDetail = dynamic(() => import('../Editor/blogDetail'), { ssr: false })
 
-const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, signinComponentPresenter, getArticleDetail, handleSubmitComment, handleSubmit }) => {
+const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, signinComponentPresenter, getArticleDetail, handleSubmitComment, handleSubmit, likeArticle }) => {
     const [detailBlog, setDetailBlog] = useState(null)
     useEffect(() => {
         getArticleDetail()
@@ -24,14 +24,21 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
         handleSubmitComment(detailCompoentPresenter.author.email, signinComponentPresenter.userProfile.id, event.comment)
     }
 
+    const likeFunc = (blogId, user) => {
+        return new Promise((resolve, reject)=> {
+            resolve(likeArticle(blogId, user))
+        }).then(res => {
+            setTimeout(() => { 
+                getArticleDetail()
+            }, 100);
+        })
+    }
 
     return (
         <div className="container ">
             <Head>
-                {/* <meta property="og:url" content="{{ request.build_absolute_uri }}" /> */}
                 <meta property="og:title" content={detailCompoentPresenter.titleDetail} />
                 <meta property="og:description" content={detailCompoentPresenter.sub_title} />
-                {/* <meta property="og:site_name" content="{% lz 'SEO_SITE_NAME' %}"/> */}
                 <meta property="og:image" content={detailCompoentPresenter.detailCover} />
                 <meta property="og:type" content="website" />
                 <meta name="robots" content="noodp" />
@@ -47,9 +54,10 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
                     show={detailCompoentPresenter.isCommentStatus !== null}
                     confirmBtnBsStyle="btn bg-primary w-25 text-white mt-5"
                     cancelBtnBsStyle="btn bg-danger w-25 text-white mt-5"
-                    title={detailCompoentPresenter.isCommentMessage}
+                    title={"Complated"}
                     onConfirm={() => asknowledge()}
                 >
+                    {detailCompoentPresenter.isCommentMessage}
                 </SweetAlert>
                 :
                 < SweetAlert
@@ -60,12 +68,13 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
                     show={detailCompoentPresenter.isCommentStatus !== null}
                     confirmBtnBsStyle="btn bg-primary w-25 text-white mt-5"
                     cancelBtnBsStyle="btn bg-danger w-25 text-white mt-5"
-                    title={detailCompoentPresenter.isCommentMessage}
+                    title={`In Complated`}
                     onConfirm={() => asknowledge()}
                 >
+                    {detailCompoentPresenter.isCommentMessage}
                 </SweetAlert>
             }
-            <div className="row">
+            <div className="row detail-comment">
                 <div className="col-12 mt-3 text-center">
                     <h3>{detailCompoentPresenter.titleDetail}</h3>
                 </div>
@@ -74,12 +83,12 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
                         <img src={detailCompoentPresenter.detailCover} alt="Cover detail" />
                     </div>
                     <div className="wrapper-like">
-                        <div className="like">
+                        <div className="like" onClick={() => likeFunc(detailCompoentPresenter.blogId, signinComponentPresenter.userProfile.id)}>
                             <div className="like-inside">
                                 <div className="pb-3">
                                     <img className="w-100" src="/assets/images/logo/heart-icon.png" alt="heart-icon" />
                                 </div>
-                                <div className="text-like  w-100 text-center">13</div>
+                                <div className="text-like  w-100 text-center">{detailCompoentPresenter.likeAmount}</div>
                             </div>
                         </div>
                     </div>
@@ -146,9 +155,9 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div className="col-lg-1 flex-column  col-12 d-flex justify-content-center w-100  py-2 align-items-center p-0">
-                                                <div className="border-comment"></div>
+                                                    <div className="border-comment"></div>
                                                 </div>
                                                 <div className="  col-lg-9 flex-column col-12 d-flex justify-content-between w-100  py-2 align-items-between p-0">
                                                     <div className="row mx-auto text-center  w-100 px-3">
@@ -158,7 +167,7 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
                                                         >
                                                             <div className="d-flex text-left my-2">
                                                                 <h4>
-                                                                {item.user_comment.first_name} {item.user_comment.last_name}
+                                                                    {item.user_comment.first_name} {item.user_comment.last_name}
                                                                 </h4>
                                                             </div>
                                                         </div>
@@ -174,9 +183,9 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    <div className="col-lg-8 text-left text-break">
-                                                        {item.content}
-                                                    </div>
+                                                        <div className="col-lg-8 text-left text-break">
+                                                            {item.content}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

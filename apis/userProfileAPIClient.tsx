@@ -5,6 +5,10 @@ export enum UserProfileAction {
   getUserProfileFailed = 'getUserProfileFailed',
   upateProfileSuccess = 'updateProfileSuccess',
   updateProfileFailed = 'updateProfileFailed',
+  getBlogUserSuccess = 'getBlogUserSuccess',
+  getBlogUserFailed = 'getBlogUserFailed',
+  removeBlogUserSuccess = 'removeBlogUserSuccess',
+  removeBlogUserFailed = 'removeBlogUserFailed'
 
 }
 
@@ -71,4 +75,50 @@ const params = (
     last_name: lastName,
     image: image
   }
+}
+
+
+export const getBlogUser: any = () => async (dispatch: Dispatch) => {
+  serviceToken({
+    method: 'get',
+    url: `blog/user`,
+  })
+    .then((response) => {
+      if (response) {
+        dispatch({
+          type: UserProfileAction.getBlogUserSuccess,
+          dataAPI: response.data
+        })
+      }
+    })
+    .catch((error) => {
+      if (error) {
+        dispatch({
+          type: UserProfileAction.getBlogUserFailed,
+        })
+      }
+    })
+}
+
+export const removeBlogUser: any = (id:number | string) => async (dispatch: Dispatch) => {
+  serviceToken({
+    method: 'delete',
+    url: `blog/delete/${id}`,
+  })
+    .then((response) => {
+      if (response) {
+        dispatch({
+          type: UserProfileAction.removeBlogUserSuccess,
+          dataAPI: response.data,
+          key_message: "ดำเนินการสำเร็จ"
+        })
+      }
+    })
+    .catch((error) => {
+      if (error) {
+        dispatch({
+          type: UserProfileAction.removeBlogUserFailed,
+        })
+      }
+    })
 }

@@ -22,7 +22,6 @@ const CategoryContent = ({data}) => {
 };
 
 CategoryContent.getInitialProps = async ({query}) => {
-    console.log(query.id)
     const res = await fetch(`${env.BASE_API}blog/content/category/${query.id}`)
     const data = await res.json()
     const jsonData = data

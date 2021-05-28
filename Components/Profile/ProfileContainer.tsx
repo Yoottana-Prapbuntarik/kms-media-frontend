@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import Router from "next/router"
 import { KeyManager } from "../../manager/KeyManager";
 import { Dispatch } from "redux";
 import { reduxForm } from "redux-form";
@@ -12,11 +13,17 @@ import {
     NewPasswordProfile,
     OldPasswordProfile,
     ProfileAction,
-    ProfilePresenter
+    ProfilePresenter,
 } from "./ProfileInterface";
 import { actionTypes as formActionTypes } from 'redux-form'
 import { getUserData } from "../../apis/ signinAPIClient";
-import { UserProfileAction, getUserProfile, updateUserProfile } from "../../apis/userProfileAPIClient";
+import {
+    UserProfileAction,
+    getUserProfile,
+    updateUserProfile,
+    getBlogUser,
+    removeBlogUser
+} from "../../apis/userProfileAPIClient";
 import { FormManager } from "../../manager/FormManager";
 
 const imageUserProfile: ImageUserProfile = {
@@ -57,7 +64,8 @@ const profilePresenter: ProfilePresenter = {
     newPasswordProfile: newPasswordProfile,
     oldPasswordProfile: oldPasswordProfile,
     isUpdateStatus: null,
-    isUpdateMessage: ''
+    isUpdateMessage: '',
+    myBlogList: []
 }
 
 export const profileReducer = (state: ProfilePresenter = profilePresenter, action: any) => {
@@ -68,7 +76,22 @@ export const profileReducer = (state: ProfilePresenter = profilePresenter, actio
                 isUpdateStatus: 200,
                 isUpdateMessage: action.key_message
             }
-        
+
+        case UserProfileAction.removeBlogUserSuccess:
+            return {
+                ...state,
+                isUpdateStatus: 200,
+                isUpdateMessage: action.key_message
+            }
+
+        case UserProfileAction.getBlogUserSuccess:
+            return {
+                ...state,
+                myBlogList: action.dataAPI.blog
+            }
+
+
+
         case UserProfileAction.getUserProfileSuccess:
             return {
                 ...state,
@@ -178,12 +201,13 @@ const mapStateToProps = (state: any) => {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps) => ({
-    getUserProfile: () => {
-        dispatch(getUserProfile(
+    getUserProfile: async () => {
+        await dispatch(getUserProfile(
             ownProps.firstName,
             ownProps.lastName,
             ownProps.uuid
-        ))
+        )),
+            await dispatch(getBlogUser())
     },
     uploadProfileImage: (e: string) => {
         dispatch({
@@ -208,7 +232,30 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps) => ({
             message: ""
         })
         dispatch(getUserData())
+        dispatch(getBlogUser())
     },
+    removeBlog: (id: number | string) => {
+        dispatch(removeBlogUser(id))
+    },
+
+    handleUpdate: (blogId:number | string, evnet: any, userId: any, imagesCover: string, title: string, subTitle: string, category: number | string) => {
+        if (userId !== undefined && category !== "" && category != 0 && title.length > 0 && subTitle.length > 0 && imagesCover.length > 0) {
+            let draftTest = {
+                imagesCover: imagesCover === "" || imagesCover === undefined ? "" : imagesCover,
+
+                title: title === "" || title === undefined ? "" : title,
+
+                subTitle: subTitle === "" || subTitle === undefined ? "" : subTitle,
+
+                category: category === "" || category === undefined ? "" : category,
+            }
+
+            localStorage.setItem("edit-draft", evnet);
+            localStorage.setItem("update-blog-id", JSON.stringify(blogId));
+            localStorage.setItem("edit-draft-detail", JSON.stringify(draftTest));
+            Router.push("/edit-blog")
+        }
+    }
 })
 
 const form = reduxForm({

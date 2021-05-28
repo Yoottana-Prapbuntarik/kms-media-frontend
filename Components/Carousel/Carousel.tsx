@@ -27,14 +27,14 @@ const CarouselSlide = ({ images }: any): any => {
                                 />
                                 <Carousel.Caption>
                                 <h1 className="text-center">{items.title}</h1>
-                                <p>{items.sub_title}</p>
+                                <p className="pt-0">{items.sub_title}</p>
                                 <Link href={{
                                     pathname: "news-detail",
                                     query:{
                                         id: items.id
                                     }
                                 }}>
-                                    <a className="border p-3 rounded text-white">
+                                    <a className="border p-3 mt-2 rounded text-white">
                                         อ่านเพิ่มเติม
                                     </a>
                                 </Link>

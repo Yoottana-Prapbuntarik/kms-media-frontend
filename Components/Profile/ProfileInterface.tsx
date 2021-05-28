@@ -37,6 +37,7 @@ export interface ProfilePresenter {
     confirmNewPasswordProfile: ConfirmNewPasswordProfile;
     isUpdateStatus: boolean;
     isUpdateMessage: string;
+    myBlogList: Array<any>;
 }
 
 export enum ProfileAction {

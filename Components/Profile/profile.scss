@@ -11,6 +11,16 @@
     z-index: 1;
 }
 
+.icon-manage-blog {
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+    &:hover {
+        transition: ease .5s;
+        opacity: .5;
+        color: #678b57;
+    }
+}
 .img-profile img {
     position: absolute;
     top: 0;

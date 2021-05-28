@@ -3,6 +3,7 @@ import DetailCompoent from "./DetailCompoent";
 import { FormManager } from "../../manager/FormManager";
 import { commentArticle, getCommentAll, getArticleDetail, GetArticleAction } from "../../apis/getAllArticle";
 import { reduxForm, reset } from "redux-form";
+import { likeArticle, LikeArticleAPI } from "../../apis/postArticleAPIClient"
 import {
     DetailCompoentPresenter,
     DetailComponentAction,
@@ -16,6 +17,8 @@ const commentField: CommentField = {
 }
 
 const detailCompoentPresenter: DetailCompoentPresenter = {
+    likeAmount: 0,
+    blogId: 0,
     titleDetail: "",
     detailCover: "",
     author: {
@@ -38,9 +41,11 @@ export const detailCompoentReducer = (
         case GetArticleAction.getArticleDetailSuccess:
             return {
                 ...state,
+                blogId: action.dataAPI.id,
                 titleDetail: action.dataAPI.title,
                 detailCover: action.dataAPI.cover,
                 category: action.dataAPI.category.name,
+                likeAmount: action.dataAPI.fk_like_blog.length,
                 author: {
                     userName: action.dataAPI.own_user.first_name + " " + action.dataAPI.own_user.last_name,
                     userProfile: action.dataAPI.own_user.image,
@@ -57,23 +62,35 @@ export const detailCompoentReducer = (
                 isCommentStatus: action.payload,
                 isCommentMessage: action.message
             }
-            
-            case GetArticleAction.commentArticleDetailSuccess:
+
+        case GetArticleAction.commentArticleDetailSuccess:
             return {
                 ...state,
                 isCommentStatus: 200,
                 isCommentMessage: "Comment Successfully!"
             }
-            
 
-            case GetArticleAction.commentArticleDetailFailed:
-            
+
+        case GetArticleAction.commentArticleDetailFailed:
+
             return {
                 ...state,
                 isCommentStatus: 401,
                 isCommentMessage: "Comment Falied! Please please signin or check information comment."
             }
-            
+
+            case LikeArticleAPI.LikeSuccess:
+            return state
+
+
+        case LikeArticleAPI.LikeFiled:
+
+            return {
+                ...state,
+                isCommentStatus: 401,
+                isCommentMessage: "Like Failed. Please Signin"
+            }
+
         case GetArticleAction.getCommentArticleDetailSuccess:
             return {
                 ...state,
@@ -115,6 +132,9 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps) => ({
             message: ""
         })
         dispatch(reset(FormManager.BlogDetail))
+    },
+    likeArticle: (blogId, userLike) => {
+        dispatch(likeArticle(blogId, userLike, blogId))
     }
 })
 

@@ -5,11 +5,22 @@ import { useEffect } from "react";
 import firebase from "firebase";
 import { firebaseSetting } from "../../manager/firebaseSetting";
 import SweetAlert from "react-bootstrap-sweetalert";
-
-const profile = ({ profilePresenter, getUserProfile,  handleUpdateStatus, uploadProfileImage, handleUpdateProfile, handleSubmit }: any) => {
+import Router from "next/router"
+const profile = ({ profilePresenter,
+    getUserProfile,
+    handleUpdateStatus,
+    uploadProfileImage,
+    handleUpdateProfile,
+    removeBlog,
+    handleUpdate,
+    handleSubmit }: any) => {
     useEffect(() => {
+        if (localStorage.getItem('access-token') === null) {
+            Router.replace("/")
+        }
+
         if (firebase.apps.length === 0) {
-            firebase.initializeApp(firebaseSetting);
+            firebase.initializeApp(firebaseSetting) 
         }
         getUserProfile()
     }, [])
@@ -35,7 +46,6 @@ const profile = ({ profilePresenter, getUserProfile,  handleUpdateStatus, upload
             }
         );
     };
-
     return (
         <div className="container mb-5">
             {profilePresenter.isUpdateMessage === "success" || profilePresenter.isUpdateStatus === 200 ?
@@ -64,7 +74,7 @@ const profile = ({ profilePresenter, getUserProfile,  handleUpdateStatus, upload
                     onConfirm={() => handleUpdateStatus()}
                 >
                 </SweetAlert>
-                }
+            }
             <div className="row mx-auto">
                 <div className="col-12 d-flex justify-content-center mt-5">
                     <div className="img-profile">
@@ -150,6 +160,74 @@ const profile = ({ profilePresenter, getUserProfile,  handleUpdateStatus, upload
                         </div>
                     </form>
                 </div>
+            </div>
+            <div className="row mt-5">
+                <div className="col-12">
+                    <h1>
+                        Your Story
+                    </h1>
+                </div>
+                {
+                    profilePresenter.myBlogList.length === 0 && <h5 className="mx-auto mt-5"> ไม่พบบทความ !</h5>
+                }
+                {
+                    profilePresenter.myBlogList.map((item, index: number) => {
+                        return (
+                            <div className="col-12 mt-5">
+                                <div className="row">
+                                    <div className="col-lg-3 col-12">
+                                        <img className="w-100" src={item.cover} alt="cover" />
+                                    </div>
+                                    <div className="col-lg-9 col-12 border-bottom">
+                                        <div className="row">
+                                            <div className="col-lg-5 col-12 pt-0">
+                                                <p className="font-weight-bold">
+                                                    {item.title}
+                                                </p>
+                                                <p className="text-secondary">
+                                                    {item.sub_title}
+                                                </p>
+                                                <p className="text-secondary">
+                                                    {item.sub_title}
+                                                </p>
+                                                <p className="text-secondary">
+                                                    โพสเมื่อ {item.pub_date.slice(0, 10)}
+                                                </p>
+                                            </div>
+                                            <div className="col-lg-7 col-12 d-flex align-items-center justify-content-end">
+                                                {console.log(item.content)}
+                                                <div>
+                                                    <a className="icon-manage-blog" onClick={()=> handleUpdate(
+                                                        item.id,
+                                                        item.content,
+                                                        item.own_user.id,
+                                                        item.cover,
+                                                        item.title,
+                                                        item.sub_title,
+                                                        item.category.id
+                                                    )}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                                <div className="pl-4">
+                                                    <a className="icon-manage-blog" onClick={() => removeBlog(item.id)}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
+                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })
+                }
             </div>
         </div>
     );

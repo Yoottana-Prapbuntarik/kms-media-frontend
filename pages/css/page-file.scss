@@ -1,0 +1,75 @@
+.bg-mdt {
+    background-image: url("/assets/images/logo/mdt.png");
+    background-repeat: no-repeat;
+    background-position: center; 
+    position: relative;
+    background-color: #8DA399;
+    // background-size:100% auto;
+    min-height: 300px;
+}
+.bg-mda {
+    background-image: url("/assets/images/logo/mda.png");
+    background-repeat: no-repeat;
+    background-position: center; 
+    position: relative;
+    // background-size:100% auto;
+    background-color: #DEC080;
+    min-height: 300px;
+    
+}
+
+.bg-mmda {
+    background-image: url("/assets/images/logo/mmda.png");
+    background-repeat: no-repeat;
+    background-position: center; 
+    position: relative;
+    // background-size:75% auto;
+    background-color: #CF907C;
+    min-height: 300px;
+}
+
+.font-72px {
+    font-size: 72px;
+}
+
+.font-36px {
+    font-size: 36px;
+}
+
+
+.bg-gray-light {
+
+    background-color:#EFEFEF;
+}
+
+@media (max-width: 1024px) {
+    .bg-mdt {
+        background-image: url("/assets/images/logo/mdt.png");
+        background-repeat: no-repeat;
+        background-position: center; 
+        position: relative;
+        background-color: #8DA399;
+        // background-size:100% auto;
+        height: auto;
+    }
+    .bg-mda {
+        background-image: url("/assets/images/logo/mda.png");
+        background-repeat: no-repeat;
+        background-position: center; 
+        position: relative;
+        // background-size:100% auto;
+        background-color: #DEC080;
+        height: auto;
+        
+    }
+    
+    .bg-mmda {
+        background-image: url("/assets/images/logo/mmda.png");
+        background-repeat: no-repeat;
+        background-position: center; 
+        position: relative;
+        // background-size:75% auto;
+        background-color: #CF907C;
+        height: auto;
+    }
+}

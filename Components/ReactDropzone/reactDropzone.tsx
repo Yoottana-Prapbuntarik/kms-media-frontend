@@ -3,10 +3,13 @@ import { useDropzone } from "react-dropzone"
 import "./react-dropzone-styles.scss";
 import firebase from "firebase"
 import { firebaseSetting } from "../../manager/firebaseSetting";
-
-firebase.initializeApp(firebaseSetting)
-
 const ReactDropzone = ({ handleChangeCover, currentImages }) => {
+
+    useEffect(()=> {
+        if (firebase.apps.length === 0) {
+            firebase.initializeApp(firebaseSetting) 
+        }
+    },[])
     const [files, setFiles] = useState([])
 
     const { getRootProps, getInputProps } = useDropzone({
