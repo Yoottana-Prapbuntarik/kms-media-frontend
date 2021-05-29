@@ -7,18 +7,42 @@ import Head from "next/head";
 import Link from "next/link";
 import { Department } from "../../manager/Department";
 import { useEffect, useState } from "react";
+import Router from "next/router";
+import SweetAlert from "react-bootstrap-sweetalert";
 const ProductType = ({ data }: any) => {
   const router = useRouter();
   const [documents, setDocument] = useState([]);
+  const [isEcception, setIsEcception] = useState(false);
   useEffect(() => {
+    let isLoggedIn = localStorage.getItem("access-token");
+    if (isLoggedIn === null) {
+      setIsEcception(true);
+    }
+
     setDocument(data);
   }, []);
+  const closePopup = () => {
+    setIsEcception(false);
+    Router.push("/signin");
+  };
   return (
     <MainLayout className="min-vh-100">
+      <SweetAlert
+        custom
+        danger
+        showCloseButton
+        confirmBtnText="Ok"
+        show={isEcception}
+        confirmBtnBsStyle="btn bg-primary w-25 text-white mt-5"
+        cancelBtnBsStyle="btn bg-danger w-25 text-white mt-5"
+        title={"In complete"}
+        onConfirm={() => closePopup()}
+      >
+        You are not logged in.
+      </SweetAlert>
       <Head>
         <title>{Department[`${router.query.slug}`]}</title>
       </Head>
-
       <div className="container-fluid mt-5 mx-5 upload-file">
         <h1 className="text-center my-5">
           <h1 className="mb-5 mx-auto">{Department[`${router.query.slug}`]}</h1>
@@ -61,7 +85,7 @@ const ProductType = ({ data }: any) => {
           ) : (
             <div className="col-12">
               <div className="row">
-                <div className="col-lg-4 col-12 mx-auto my-5">
+                <div className="col-lg-4 col-md-6 col-12 mx-auto my-5">
                   <div className="d-block">
                     <img
                       src="/assets/images/no-content.PNG"

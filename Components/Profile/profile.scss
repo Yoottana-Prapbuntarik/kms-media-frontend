@@ -11,6 +11,15 @@
     z-index: 1;
 }
 
+.logout {
+    cursor: pointer;
+    color: #58764a;
+    &:hover {
+        color: #58764a;
+        opacity: .5;
+    }
+}
+
 .icon-manage-blog {
     cursor: pointer;
     text-decoration: none;

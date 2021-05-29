@@ -15,6 +15,7 @@ const profile = () => {
             firstName={router.query.firstName} 
             lastName={router.query.lastName} 
             uuid={router.query.uuid}/>
+            
         </MainLayout>
     )
 }

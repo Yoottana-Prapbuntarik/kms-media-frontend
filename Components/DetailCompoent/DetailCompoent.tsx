@@ -96,7 +96,7 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
                         <div className="row">
                             <div className="col-12 py-5">
                                 <div className="d-flex h-100  align-items-center  flex-wrap">
-                                    <div className="border  wrapper-image-owner">
+                                    <div className="border  wrapper-image-owner border border-light rounded-circle">
                                         <img className=" rounded profile-user-owner" src={detailCompoentPresenter.author.userProfile} alt="" />
                                     </div>
                                     <div className="px-3 text-secondary">
@@ -104,7 +104,7 @@ const DetailCompoent = ({ detailCompoentPresenter, asknowledge, getCommentAll, s
                                     </div>
                                         -
                                     <div className="px-3 text-secondary">
-                                        Treanding
+                                    Trending
                                     </div>
                                         -
                                     <div className="px-3 text-secondary">

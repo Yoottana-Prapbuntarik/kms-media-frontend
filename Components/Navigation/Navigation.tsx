@@ -20,14 +20,10 @@ const Navigation = ({ navigationPresenter, signinComponentPresenter, getUserData
         };
     }, [])
 
-    const logout = () => {
-        localStorage.removeItem('access-token')
-        Router.push('/signin')
-    }
     return (
         <Fragment>
 
-            <Navbar className={`nav-custome ${isScroll === true ? 'position-nav-fixed' : 'position-nav-relative'}`} expand="lg">
+            <Navbar className={`nav-custome ${isScroll === true ? 'position-nav-fixed' : 'position-nav-relative'}`} expand="xl">
                 <div className="container-fluid text-center">
                     <div className="h-100 d-flex align-items-center w-25">
                         <Link href="/" passHref>
@@ -38,7 +34,7 @@ const Navigation = ({ navigationPresenter, signinComponentPresenter, getUserData
                     </div>
                     <Navbar.Toggle />
                     <Navbar.Collapse>
-                        <Nav className="justify-content-center w-50 margin-auto-nav-mobile">
+                        <Nav className="justify-content-between align-items-center w-50 margin-auto-nav-mobile">
                             {
                                 navigationPresenter.navigationItems.map((navLinkList, idx: number) => {
                                     return (
@@ -47,7 +43,7 @@ const Navigation = ({ navigationPresenter, signinComponentPresenter, getUserData
                                             <div className="d-flex justify-content-around">
 
                                                 <Link href={navLinkList.routePath} key={idx} passHref>
-                                                    <a className="nav-link link-navbar  w-140px">
+                                                    <a className="nav-link link-navbar  w-100">
                                                         {navLinkList.keyTitle}
                                                     </a>
                                                 </Link>
@@ -124,10 +120,12 @@ const Navigation = ({ navigationPresenter, signinComponentPresenter, getUserData
                                                             Hello, <span className="text-green">{`${signinComponentPresenter.userProfile.first_name === "" ? "Admin" :
                                                                 signinComponentPresenter.userProfile.first_name.toUpperCase()}`}</span>
                                                         </div>
+
                                                     </div>
                                                 </a>
+
                                             </Link>
-                                            <a className="nav-link  link-social w-140px" onClick={() => logout()}>Sign out</a>
+                                            
                                         </> :
                                         <>
                                             <Link href={"/signin"}>

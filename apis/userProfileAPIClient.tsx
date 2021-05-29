@@ -7,8 +7,12 @@ export enum UserProfileAction {
   updateProfileFailed = 'updateProfileFailed',
   getBlogUserSuccess = 'getBlogUserSuccess',
   getBlogUserFailed = 'getBlogUserFailed',
+  getDocumentUserSuccess = 'getDocumentUserSuccess',
+  getDocumentUserFailed = 'getDocumentUserFailed',
   removeBlogUserSuccess = 'removeBlogUserSuccess',
-  removeBlogUserFailed = 'removeBlogUserFailed'
+  removeBlogUserFailed = 'removeBlogUserFailed',
+  removeDocumentSuccess = 'removeDocumentSuccess',
+  removeDocumentFailed = 'removeDocumentFailed'
 
 }
 
@@ -100,6 +104,28 @@ export const getBlogUser: any = () => async (dispatch: Dispatch) => {
     })
 }
 
+export const getDocumentUser: any = () => async (dispatch: Dispatch) => {
+  serviceToken({
+    method: 'get',
+    url: `document/user`,
+  })
+    .then((response) => {
+      if (response) {
+        dispatch({
+          type: UserProfileAction.getDocumentUserSuccess,
+          dataAPI: response.data
+        })
+      }
+    })
+    .catch((error) => {
+      if (error) {
+        dispatch({
+          type: UserProfileAction.getDocumentUserFailed,
+        })
+      }
+    })
+}
+
 export const removeBlogUser: any = (id:number | string) => async (dispatch: Dispatch) => {
   serviceToken({
     method: 'delete',
@@ -118,6 +144,29 @@ export const removeBlogUser: any = (id:number | string) => async (dispatch: Disp
       if (error) {
         dispatch({
           type: UserProfileAction.removeBlogUserFailed,
+        })
+      }
+    })
+}
+
+export const removeDocument: any = (id:number | string) => async (dispatch: Dispatch) => {
+  serviceToken({
+    method: 'delete',
+    url: `template/delete/${id}`,
+  })
+    .then((response) => {
+      if (response) {
+        dispatch({
+          type: UserProfileAction.removeDocumentSuccess,
+          dataAPI: response.data,
+          key_message: "ดำเนินการสำเร็จ"
+        })
+      }
+    })
+    .catch((error) => {
+      if (error) {
+        dispatch({
+          type: UserProfileAction.removeDocumentFailed,
         })
       }
     })

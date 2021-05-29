@@ -1,17 +1,19 @@
 require("isomorphic-fetch");
-import { uploadDocument } from "../../apis/Services/uploadDocument";
+import { updateUploadDocument } from "../../../apis/Services/uploadDocument";
 import { Tab, Tabs } from "react-bootstrap";
-import { env } from "../../config-project.json";
-import MainLayout from "../../layouts/MainLayout";
+import { env } from "../../../config-project.json";
+import MainLayout from "../../../layouts/MainLayout";
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Router from "next/router";
+import Router, {useRouter} from "next/router";
 import SweetAlert from "react-bootstrap-sweetalert";
-import "../css/send-file.scss";
-import FileUpload from "../../Components/ReactDropzone/FileUpload";
+import "../../css/send-file.scss";
+import FileUpload from "../../../Components/ReactDropzone/FileUpload";
 import { connect } from "react-redux";
+
 const ManageDocument = ({ data, presenter }: any) => {
+  const router = useRouter()
   const [documents, setDocument] = useState([]);
   const [isEcception, setIsEcception] = useState(false);
   const [file, setFile] = useState([]);
@@ -57,14 +59,15 @@ const ManageDocument = ({ data, presenter }: any) => {
       });
     } else {
       return new Promise((resolve,reject)=> {
-        resolve(uploadDocument(
+        resolve(updateUploadDocument(
+          router.query.id,
           presenter.signinComponentReducer.userProfile.id,
           documents[0].document_type.id,
           uploadInformation.fullname,
           uploadInformation.stdCode,
           "waiting",
           file,
-          documents[0].id
+          router.query.template,
         ))
       }).then(()=>{ 
         setPopup({
@@ -100,7 +103,6 @@ const ManageDocument = ({ data, presenter }: any) => {
           {documents.length !== 0 && documents[0].document_type.document_name}
         </title>
       </Head>
-    {console.log(documents)}
       <div className="container-fluid mx-5  my-5">
         <SweetAlert
           custom
@@ -246,7 +248,7 @@ const ManageDocument = ({ data, presenter }: any) => {
 };
 
 ManageDocument.getInitialProps = async ({ query }) => {
-  const res = await fetch(`${env.BASE_API}template/find/${query.id}`);
+  const res = await fetch(`${env.BASE_API}template/find/${query.document}`);
   const data = await res.json();
   const jsonData = data;
   return {

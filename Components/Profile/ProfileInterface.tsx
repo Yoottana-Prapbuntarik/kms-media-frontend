@@ -38,6 +38,7 @@ export interface ProfilePresenter {
     isUpdateStatus: boolean;
     isUpdateMessage: string;
     myBlogList: Array<any>;
+    myDocumentList: Array<any>;
 }
 
 export enum ProfileAction {

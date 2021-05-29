@@ -16,7 +16,7 @@ const File = () => {
                     Upload file
                 </h1>
                 <div className="row  my-5">
-                    <div className="col-lg-4 col-md-6 col-12 mt-5">
+                    <div className="col-xl-4 col-lg-6 col-md-6 col-12 mt-5">
                         <Link href="/file/mdt">
                             <a>
                                 <div className="bg-mdt mx-auto p-5" style={{ borderTopLeftRadius: "15px", borderTopRightRadius: "15px" }}>
@@ -43,7 +43,7 @@ const File = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-4 col-md-6 col-12 mt-5">
+                    <div className="col-xl-4 col-lg-6 col-md-6 col-12 mt-5">
                         <Link href="/file/mda">
                             <a>
 
@@ -69,7 +69,7 @@ const File = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-4 col-md-6 col-12 mt-5">
+                    <div className="col-xl-4 col-lg-6 col-md-6 col-12 mt-5">
                         <Link href="/file/mmda">
                             <a>
                                 <div className="bg-mmda p-5" style={{ borderTopLeftRadius: "15px", borderTopRightRadius: "15px" }}>

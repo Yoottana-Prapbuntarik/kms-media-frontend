@@ -22,6 +22,8 @@ import {
     getUserProfile,
     updateUserProfile,
     getBlogUser,
+    getDocumentUser,
+    removeDocument,
     removeBlogUser
 } from "../../apis/userProfileAPIClient";
 import { FormManager } from "../../manager/FormManager";
@@ -65,7 +67,8 @@ const profilePresenter: ProfilePresenter = {
     oldPasswordProfile: oldPasswordProfile,
     isUpdateStatus: null,
     isUpdateMessage: '',
-    myBlogList: []
+    myBlogList: [],
+    myDocumentList: []
 }
 
 export const profileReducer = (state: ProfilePresenter = profilePresenter, action: any) => {
@@ -84,13 +87,24 @@ export const profileReducer = (state: ProfilePresenter = profilePresenter, actio
                 isUpdateMessage: action.key_message
             }
 
+        case UserProfileAction.removeDocumentSuccess:
+            return {
+                ...state,
+                isUpdateStatus: 200,
+                isUpdateMessage: action.key_message
+            }
+
         case UserProfileAction.getBlogUserSuccess:
             return {
                 ...state,
                 myBlogList: action.dataAPI.blog
             }
 
-
+        case UserProfileAction.getDocumentUserSuccess:
+            return {
+                ...state,
+                myDocumentList: action.dataAPI.document
+            }
 
         case UserProfileAction.getUserProfileSuccess:
             return {
@@ -208,6 +222,7 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps) => ({
             ownProps.uuid
         )),
             await dispatch(getBlogUser())
+            await dispatch(getDocumentUser())
     },
     uploadProfileImage: (e: string) => {
         dispatch({
@@ -233,9 +248,14 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps) => ({
         })
         dispatch(getUserData())
         dispatch(getBlogUser())
+        dispatch(getDocumentUser())
+
     },
     removeBlog: (id: number | string) => {
         dispatch(removeBlogUser(id))
+    },
+    removeDocument: (id: number | string) => {
+        dispatch(removeDocument(id))
     },
 
     handleUpdate: (blogId:number | string, evnet: any, userId: any, imagesCover: string, title: string, subTitle: string, category: number | string) => {

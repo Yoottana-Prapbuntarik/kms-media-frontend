@@ -1,8 +1,9 @@
-import dynamic from 'next/dynamic'
-import { useEffect } from 'react'
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 import Router from "next/router";
 import SweetAlert from "react-bootstrap-sweetalert";
-const MediumEditor = dynamic(() => import('../Editor/Editor'), { ssr: false })
+
+const MediumEditor = dynamic(() => import("../Editor/Editor"), { ssr: false });
 
 const WriteBlog = ({
     writeBlogPresenter,
@@ -15,49 +16,67 @@ const WriteBlog = ({
     handleChangeCategory,
     getCategory,
     handlePostStatus,
-    loadContentDraft
+    loadContentDraft,
 }: any) => {
+    const [isEcception, setIsEcception] = useState(false);
     useEffect(() => {
-        let isLoggedIn = localStorage.getItem("access-token")
+        let isLoggedIn = localStorage.getItem("access-token");
         if (isLoggedIn === null) {
-            Router.push("/signin")
+            setIsEcception(true)
         }
-        getCategory()
-        loadContentDraft()
-    }, [])
+        getCategory();
+        loadContentDraft();
+    }, []);
+
+    const closePopup = () => {
+        setIsEcception(false)
+        Router.push("/signin");
+    };
 
     return (
         <div className="container-fluid">
-            {
-                writeBlogPresenter.isPostStatus === "success" || writeBlogPresenter.isPostStatus === 200 ?
-                    < SweetAlert
-                        custom
-                        success
-                        showCloseButton
-                        confirmBtnText="Ok"
-                        show={writeBlogPresenter.isPostStatus !== null}
-                        confirmBtnBsStyle="btn bg-primary w-25 text-white mt-5"
-                        cancelBtnBsStyle="btn bg-danger w-25 text-white mt-5"
-                        title={writeBlogPresenter.isPostMessage}
-                        onConfirm={() => handlePostStatus()}
-                    >
-                    </SweetAlert>
-                    :
-                    < SweetAlert
-                        custom
-                        danger
-                        showCloseButton
-                        confirmBtnText="Ok"
-                        show={writeBlogPresenter.isPostStatus !== null}
-                        confirmBtnBsStyle="btn bg-primary w-25 text-white mt-5"
-                        cancelBtnBsStyle="btn bg-danger w-25 text-white mt-5"
-                        title={writeBlogPresenter.isPostMessage}
-                        onConfirm={() => handlePostStatus()}
-                    >
-                    </SweetAlert>
-            }
+            <SweetAlert
+                custom
+                danger
+                showCloseButton
+                confirmBtnText="Ok"
+                show={isEcception}
+                confirmBtnBsStyle="btn bg-primary w-25 text-white mt-5"
+                cancelBtnBsStyle="btn bg-danger w-25 text-white mt-5"
+                title={"In complete"}
+                onConfirm={() => closePopup()}
+            >
+                You are not logged in.
+      </SweetAlert>
+            {writeBlogPresenter.isPostStatus === "success" ||
+                writeBlogPresenter.isPostStatus === 200 ? (
+                <SweetAlert
+                    custom
+                    success
+                    showCloseButton
+                    confirmBtnText="Ok"
+                    show={writeBlogPresenter.isPostStatus !== null}
+                    confirmBtnBsStyle="btn bg-primary w-25 text-white mt-5"
+                    cancelBtnBsStyle="btn bg-danger w-25 text-white mt-5"
+                    title={writeBlogPresenter.isPostMessage}
+                    onConfirm={() => handlePostStatus()}
+                ></SweetAlert>
+            ) : (
+                <SweetAlert
+                    custom
+                    danger
+                    showCloseButton
+                    confirmBtnText="Ok"
+                    show={writeBlogPresenter.isPostStatus !== null}
+                    confirmBtnBsStyle="btn bg-primary w-25 text-white mt-5"
+                    cancelBtnBsStyle="btn bg-danger w-25 text-white mt-5"
+                    title={writeBlogPresenter.isPostMessage}
+                    onConfirm={() => handlePostStatus()}
+                ></SweetAlert>
+            )}
             <div className="row h-100 align-items-center justify-content-center">
-                <MediumEditor onSubmitWriteBlog={handleSubmitWriteBlog}
+                <MediumEditor
+                    onSubmitWriteBlog={handleSubmitWriteBlog}
                     onSubmitSaveDraft={handleSaveDraft}
                     dataReducer={signinComponentPresenter}
                     handleChangeTitle={handleChangeTitle}
@@ -67,8 +86,8 @@ const WriteBlog = ({
                     writeBlogPresenter={writeBlogPresenter}
                 />
             </div>
-        </div >
-    )
-}
+        </div>
+    );
+};
 
-export default WriteBlog
+export default WriteBlog;

@@ -18,6 +18,11 @@ body{
   background: #DCDCDC;
 }
 
+
+td, th {
+  white-space: nowrap !important;
+}
+
 .bg-green-dark {
   background: #163F33 !important;
 }
