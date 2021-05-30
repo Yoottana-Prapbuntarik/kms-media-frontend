@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import DetailCompoent from "./DetailCompoent";
 import { FormManager } from "../../manager/FormManager";
-import { commentArticle, getCommentAll, getArticleDetail, GetArticleAction } from "../../apis/getAllArticle";
+import { commentArticle, getCommentAll, getArticleDetail, GetArticleAction, updateCommentArticle, deleteCommentByUserComment } from "../../apis/getAllArticle";
 import { reduxForm, reset } from "redux-form";
 import { likeArticle, LikeArticleAPI } from "../../apis/postArticleAPIClient"
 import {
@@ -78,6 +78,21 @@ export const detailCompoentReducer = (
                 isCommentStatus: 401,
                 isCommentMessage: "Comment Falied! Please please signin or check information comment."
             }
+        case GetArticleAction.updateCommentDetailSuccess:
+            return {
+                ...state,
+                isCommentStatus: 200,
+                isCommentMessage: action.keyMessage
+            }
+
+
+        case GetArticleAction.updateCommentDetailFailed:
+
+            return {
+                ...state,
+                isCommentStatus: 401,
+                isCommentMessage: action.keyMessage
+            }
 
             case LikeArticleAPI.LikeSuccess:
             return state
@@ -90,7 +105,25 @@ export const detailCompoentReducer = (
                 isCommentStatus: 401,
                 isCommentMessage: "Like Failed. Please Signin"
             }
+            
+            
+            
+        case GetArticleAction.deleteCommentDetailSuccess:
+            return {
+                ...state,
+                isCommentStatus: 200,
+                isCommentMessage: "Delete Comment successfully"
+            }
 
+        case GetArticleAction.deleteCommentDetailFailed:
+            return {
+                ...state,
+                isCommentStatus: 401,
+                isCommentMessage: "Delete Comment Failed"
+            }
+
+        case GetArticleAction.deleteCommentDetailSuccess:
+    
         case GetArticleAction.getCommentArticleDetailSuccess:
             return {
                 ...state,
@@ -122,14 +155,37 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps) => ({
         dispatch(commentArticle(ownProps.detail, userCommentId, commentText, owner))
     },
 
+    handleSubmitUpdateComment: (idEdit, userCommentId, commentText) => {
+        console.log(idEdit, ownProps.detail, userCommentId, commentText)
+        dispatch(updateCommentArticle(idEdit, ownProps.detail, userCommentId, commentText))
+        setTimeout(() => {
+            dispatch(getCommentAll(ownProps.detail))
+        }, 500);
+    },
+
     getCommentAll: () => {
         dispatch(getCommentAll(ownProps.detail))
+    },
+    deleteCommentByIdOwnUser: (id:number | string) => {
+        dispatch(deleteCommentByUserComment(id))
+        setTimeout(() => {
+            dispatch(getCommentAll(ownProps.detail))
+        }, 500);
     },
     asknowledge: () => {
         dispatch({
             type: DetailComponentAction.askknowledgeErrorComment,
             payload: null,
             message: ""
+        })
+        dispatch(reset(FormManager.BlogDetail))
+    },
+
+    asknowledgeSubmit: (status, msg) => {
+        dispatch({
+            type: DetailComponentAction.askknowledgeErrorComment,
+            payload: status,
+            message: msg
         })
         dispatch(reset(FormManager.BlogDetail))
     },

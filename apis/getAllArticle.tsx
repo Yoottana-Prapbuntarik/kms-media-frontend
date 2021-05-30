@@ -9,7 +9,12 @@ export enum GetArticleAction {
   commentArticleDetailSuccess = 'commentArticleDetailSuccess',
   commentArticleDetailFailed = 'commentArticleDetailFailed',
   getCommentArticleDetailSuccess = 'getCommentArticleDetailSuccess',
-  getCommentArticleDetailFailed = 'getCommentArticleDetailFailed'
+  getCommentArticleDetailFailed = 'getCommentArticleDetailFailed',
+  deleteCommentDetailSuccess = 'deleteCommentDetailSuccess',
+  deleteCommentDetailFailed = 'deleteCommentDetailFailed',
+  updateCommentDetailSuccess = 'updateCommentDetailSuccess',
+  updateCommentDetailFailed = 'updateCommentDetailFailed',
+
 }
 
 export const getArticle: any = () => async (dispatch: Dispatch) => {
@@ -77,8 +82,27 @@ export const getCommentAll: any = (id: number | string) => async (dispatch: Disp
       }
     })
 }
-
-
+export const deleteCommentByUserComment: any = (id: number | string) => async (dispatch: Dispatch) => {
+  serviceToken({
+    method: 'delete',
+    url: `blog/comment/delete/${id}`,
+  })
+    .then((response) => {
+      if (response) {
+        dispatch({
+          type: GetArticleAction.deleteCommentDetailSuccess,
+          dataAPI: response.data,
+        })
+      }
+    })
+    .catch((error) => {
+      if (error) {
+        dispatch({
+          type: GetArticleAction.deleteCommentDetailFailed
+        })
+      }
+    })
+}
 
 export const commentArticle : any = (
   article: string,
@@ -111,6 +135,40 @@ export const commentArticle : any = (
         dispatch({
           type: GetArticleAction.commentArticleDetailFailed,
           keyMessage: "Comment failed !"
+        })
+      }
+    })
+}
+
+export const updateCommentArticle : any = (
+  id: string | number,
+  article: string | number,
+  userComment: string,
+  content: string,
+) => async (dispatch: Dispatch) => {
+  serviceToken({
+    method: 'put',
+    url: `blog/comment/update/${id}`,
+    data: {
+      article: article,
+      user_comment: userComment,
+      content: content,
+    }  
+  })
+    .then((response) => {
+      if (response) {
+        dispatch({
+          type: GetArticleAction.updateCommentDetailSuccess,
+          dataAPI: response.data,
+          keyMessage: "Comment Update Successfully"
+        })
+      }
+    })
+    .catch((error) => {
+      if (error) {
+        dispatch({
+          type: GetArticleAction.updateCommentDetailSuccess,
+          keyMessage: "Comment Update failed !"
         })
       }
     })
