@@ -82,6 +82,16 @@
     flex-direction: row !important;
 }
 
+.search-container {
+    width: 100%;
+    position: relative;
+    .search-box {
+        position: absolute;
+        top: 0;
+        left:0;
+        right:0;
+    }
+}
 
 @media (max-width: 1600.98px){
     .img-logo{

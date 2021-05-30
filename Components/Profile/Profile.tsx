@@ -301,8 +301,7 @@ const profile = ({
         <div className="col-12 mt-5">
           <h1>Your Document</h1>
         </div>
-        {console.log(profilePresenter.myDocumentList)}
-
+        
         {profilePresenter.myDocumentList.length === 0 ? (
           <h5 className="mx-auto mt-5"> ไม่พบเอกสาร !</h5>
         ) : (

@@ -6,6 +6,9 @@ import { getPost, getPostCategory } from "../../apis/Services/getAllArtcleAPICli
 import { connect } from "react-redux";
 import { LikeArtcleScore} from "../../utils/featureLike";
 import { useRouter } from "next/router";
+let pathIgnore = {
+    searchResults: "/search-results"
+}
 const CardContent = ({ data, presenter }: any) => {
     const router = useRouter()
     const [dataItems, setData] = useState([])
@@ -46,6 +49,8 @@ const CardContent = ({ data, presenter }: any) => {
                                     </div>
                                 </a>
                             </Link>
+                            {
+                            router.pathname !== pathIgnore.searchResults &&
                             <div className="wrapper-like" onClick={() => likeArticle(items.id, presenter.signinComponentReducer.userProfile.id)} >
                                 <div className="like">
                                     <div className="like-inside">
@@ -58,6 +63,7 @@ const CardContent = ({ data, presenter }: any) => {
                                     </div>
                                 </div>
                             </div>
+                            }
                             <Card.Body>
                                 <p className="text-warning font-weight-bold mt-5">Trending</p>
                                 <h5>{items.title}</h5>
