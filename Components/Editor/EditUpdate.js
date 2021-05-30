@@ -93,15 +93,6 @@ const EditUpdate = ({
   return (
     <div className="container my-5">
       <div className="row">
-        <div className="col-12 d-flex justify-content-end">
-          <button
-            className="btn btn-primary ml-2"
-            onClick={SaveToDb(convertToRaw(editorState.getCurrentContent()))}
-          >
-            Update
-          </button>
-        </div>
-
         <div className="col-12 my-3">
           <ReactDropzone
             currentImages={editwriteBlogPresenter}
@@ -219,6 +210,14 @@ const EditUpdate = ({
               },
             }}
           />
+        </div>
+        <div className="col-12 d-flex justify-content-end">
+          <button
+            className="btn btn-primary ml-2"
+            onClick={SaveToDb(convertToRaw(editorState.getCurrentContent()))}
+          >
+            Update
+          </button>
         </div>
       </div>
     </div>

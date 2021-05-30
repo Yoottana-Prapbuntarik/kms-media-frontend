@@ -74,9 +74,11 @@ const profile = ({
           show={profilePresenter.isUpdateStatus !== null}
           confirmBtnBsStyle="btn bg-primary w-25 text-white mt-5"
           cancelBtnBsStyle="btn bg-danger w-25 text-white mt-5"
-          title={profilePresenter.isUpdateMessage}
+          title={"Complete"}
           onConfirm={() => handleUpdateStatus()}
-        ></SweetAlert>
+        >
+          {profilePresenter.isUpdateMessage}
+        </SweetAlert>
       ) : (
         <SweetAlert
           custom
@@ -86,9 +88,11 @@ const profile = ({
           show={profilePresenter.isUpdateStatus !== null}
           confirmBtnBsStyle="btn bg-primary w-25 text-white mt-5"
           cancelBtnBsStyle="btn bg-danger w-25 text-white mt-5"
-          title={profilePresenter.isUpdateMessage}
+          title={"In complete"}
           onConfirm={() => handleUpdateStatus()}
-        ></SweetAlert>
+        >
+          {profilePresenter.isUpdateMessage}
+        </SweetAlert>
       )}
       <div className="row mx-auto">
         <div className="col-12 text-right mt-5">
@@ -228,7 +232,6 @@ const profile = ({
                     <div className="col-lg-5 col-12 pt-0">
                       <p className="font-weight-bold">{item.title}</p>
                       <p className="text-secondary">{item.sub_title}</p>
-                      <p className="text-secondary">{item.sub_title}</p>
                       <p className="text-secondary">
                         โพสเมื่อ {item.pub_date.slice(0, 10)}
                       </p>
@@ -311,12 +314,12 @@ const profile = ({
                     <thead>
                       <tr className="text-left">
                         <th scope="col">เลขที่เอกสาร</th>
-                        <th scope="col">วันที่อัพโหลด</th>
                         <th scope="col">สถานะเอกสาร</th>
+                        <th scope="col">วันที่อัพโหลด</th>
                         <th scope="col">เอกสาร</th>
                         <th scope="col">สาขาวิชา</th>
                         <th scope="col">ข้อเสนอแก้ไข</th>
-                        <th scope="col">ลบ / แก้ไข</th>
+                        <th scope="col">แก้ไข / ลบ</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -327,7 +330,8 @@ const profile = ({
                               <th className="py-4" scope="row">
                                 {item.id}
                               </th>
-                              <td className="py-4">
+                              <td className={`py-4 ${item.document_status === "approve" ? "text-success" : 
+                            item.document_status === "reject" ? "text-danger" : "text-warning"}`}>
                                 {item.document_status.toUpperCase()}
                               </td>
                               <td className="py-4">{item.pub_date}</td>

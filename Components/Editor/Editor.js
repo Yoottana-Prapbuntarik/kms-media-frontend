@@ -101,21 +101,6 @@ const EditorTools = ({
   return (
     <div className="container my-5">
       <div className="row">
-        <div className="col-12 d-flex justify-content-end">
-          <button
-            className="btn btn-primary"
-            onClick={SaveDraft(convertToRaw(editorState.getCurrentContent()))}
-          >
-            Save Draft
-          </button>
-          <button
-            className="btn btn-primary ml-2"
-            onClick={SaveToDb(convertToRaw(editorState.getCurrentContent()))}
-          >
-            Publish
-          </button>
-        </div>
-
         <div className="col-12 my-3">
           <ReactDropzone
             currentImages={writeBlogPresenter}
@@ -233,6 +218,20 @@ const EditorTools = ({
               },
             }}
           />
+        </div>
+        <div className="col-12 d-flex justify-content-end">
+          {/* <button
+            className="btn btn-primary"
+            onClick={SaveDraft(convertToRaw(editorState.getCurrentContent()))}
+          >
+            Save Draft
+          </button> */}
+          <button
+            className="btn btn-primary ml-2"
+            onClick={SaveToDb(convertToRaw(editorState.getCurrentContent()))}
+          >
+            Publish
+          </button>
         </div>
       </div>
     </div>
