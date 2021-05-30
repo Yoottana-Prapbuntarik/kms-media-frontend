@@ -24,12 +24,15 @@ const Pagegination = ({ ownProps }: any) => {
             <div className="row">
                 <Card data={currentItems} />
             </div>
-            <PageinationButton
+            {
+                items.length > 0 &&
+                <PageinationButton
                 currentIndex={currentPage}
                 itemsPerPage={ownProps.itemsPerPage}
                 totalItems={items.length}
                 pageinate={pageinate}
-            />
+                />
+            }
         </div>
     )
 }

@@ -33,8 +33,9 @@ export const categoryComponentReducer = (
     return state
 }
 
-const mapStateToProps = (state: any) => ({
-    categoryComponentPresenter: state.categoryComponentReducer
+const mapStateToProps = (state: any, ownProps: any) => ({
+    categoryComponentPresenter: state.categoryComponentReducer,
+    categoryItem: ownProps.categoryItem.category
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

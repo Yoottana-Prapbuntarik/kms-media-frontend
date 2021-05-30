@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./editor.scss";
 import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
 import draftToMarkdown from "draftjs-to-markdown";
 import { Editor } from "react-draft-wysiwyg";
@@ -185,25 +186,15 @@ const EditorTools = ({
             onEditorStateChange={(e) => onEditorStateChange(e)}
             toolbar={{
               options: [
-                "inline",
                 "textAlign",
                 "blockType",
                 "fontSize",
-                "colorPicker",
                 "link",
                 "image",
                 "embedded",
                 "history",
               ],
-              inline: {
-                options: [
-                  "bold",
-                  "italic",
-                  "monospace",
-                  "superscript",
-                  "subscript",
-                ],
-              },
+
               blockType: {
                 inDropdown: true,
                 options: [
@@ -213,7 +204,6 @@ const EditorTools = ({
                   "H3",
                   "H4",
                   "H5",
-                  "H6",
                   "Blockquote",
                 ],
                 className: undefined,

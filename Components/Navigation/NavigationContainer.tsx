@@ -33,6 +33,10 @@ const navigationItems: NavigationItems[] = [
         keyTitle: 'Write a story',
         routePath: '/write-blog'
     },
+    {
+        keyTitle: 'File',
+        routePath: '/file'
+    },
 ]
 
 const social: NavigationItems[] = [

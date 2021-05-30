@@ -1,3 +1,16 @@
+.detail-comment {
+    p,h1,h2,h3,h4,h5 {
+    padding-top: 2rem;
+    }
+}
+.wrapper-image-owner {
+    max-height: 100px;
+    position: relative;
+    overflow: hidden;
+    .profile-user-owner {
+        width: 100px;
+    }
+}
 .cover-detail{
      position: relative;
      max-height: 513px;
@@ -6,11 +19,29 @@
          width: 100%;
      }
 }
+.user-profile-images {
+    position: relative;
+    height: 100px;
+    width: 100px;
+    background: #eeeeee;
+    border-radius: 50%;
+    padding: .75rem;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    text-align: center;
+    overflow: hidden;
+}
+.border-comment {
+    background: #C4C4C4;
+    height: 75%;
+    width: 1px;
+}
 
 .wrapper-like {
     position: relative;
     bottom: 50px;
-    left: -10px;
+    left: -5px;
     .like {
         position: absolute;
         flex-direction: column;
@@ -42,4 +73,19 @@
     border-radius: 50%;
     display: flex;
     align-items: center;
+}
+
+
+.justify-center-responsive {
+    justify-content: flex-start;
+}
+@media (max-width: 1024.98px)  {
+    .justify-center-responsive {
+        justify-content: center;
+    }
+    .border-comment {
+        background: #C4C4C4;
+        height: 1px;
+        width: 75%;
+    }    
 }

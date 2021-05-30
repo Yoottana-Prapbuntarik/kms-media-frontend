@@ -39,6 +39,5 @@ const params = (email: string, mobile: string, firstName: string, lastName: stri
     first_name: firstName, 
     last_name: lastName, 
     password: password
-
   }
 }

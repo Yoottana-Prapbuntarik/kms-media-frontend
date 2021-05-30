@@ -1,0 +1,17 @@
+.catd-wrapper {
+    position: relative;
+    max-height: 400px;
+    overflow: hidden;
+    cursor: pointer;
+    &:hover {
+        transition: ease 1s;
+        opacity: .5;
+    }
+}
+a {
+    text-decoration: none !important;
+}
+
+.remove-border {
+    border: none !important;
+}

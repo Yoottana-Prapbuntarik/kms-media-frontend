@@ -1,0 +1,43 @@
+.upload-wrapper {
+  border: 10px dotted #c4c4c4;
+  border-style: dashed;
+  border-radius: 5px;
+  height: 652px !important;
+}
+
+.text-green-dark {
+  color: #8da399;
+}
+
+.btn-upload-file {
+  background-color: #8da399 !important;
+  color: #fff !important;
+  font-weight: bold;
+  font-size: 20px;
+  width: 150px;
+  &:hover {
+    opacity: .5;
+  }
+}
+.custom-tab {
+  nav {
+    .nav-link.active {
+      background-color: #f6f6f6 !important;
+      border: none !important;
+      border-bottom: 3px solid #8da399 !important;
+    }
+  }
+}
+@media (max-width: 1024px) {
+  .upload-wrapper {
+    border-radius: 5px;
+    height: 300px !important;
+  }
+  .btn-upload-file {
+    background-color: #8da399 !important;
+    color: #fff !important;
+    font-weight: bold;
+    font-size: 20px;
+    width: 100%;
+  }
+}

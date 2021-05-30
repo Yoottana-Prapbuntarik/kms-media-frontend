@@ -9,6 +9,8 @@ import { categoryComponentReducer } from "../Components/CategoryComponent/Catego
 import { detailCompoentReducer } from "../Components/DetailCompoent/DetailCompoentContainer";
 import {writeBlogReducer} from "../Components/WriteBlog/WriteBlogContainer";
 import { homeReducer } from "../Components/Home/HomeContainer";
+import { profileReducer } from "../Components/Profile/ProfileContainer";
+import { editBlogReducer } from "../Components/EditBlog/EditBlogContainer";
 export interface initialState { }
 
 const rootReducers = combineReducers({
@@ -21,6 +23,8 @@ const rootReducers = combineReducers({
   detailCompoentReducer: detailCompoentReducer,
   writeBlogReducer: writeBlogReducer,
   homeReducer: homeReducer,
+  profileReducer: profileReducer,
+  editBlogReducer: editBlogReducer,
   form: reduxFormReducer
 });
 

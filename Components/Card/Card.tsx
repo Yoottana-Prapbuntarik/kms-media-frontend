@@ -2,13 +2,36 @@ import { Card } from "react-bootstrap";
 import Link from 'next/link'
 import './card.scss'
 import { useState, useEffect } from "react";
-
-const CardContent = ({ data }) => {
+import { getPost, getPostCategory } from "../../apis/Services/getAllArtcleAPIClient";
+import { connect } from "react-redux";
+import { LikeArtcleScore} from "../../utils/featureLike";
+import { useRouter } from "next/router";
+const CardContent = ({ data, presenter }: any) => {
+    const router = useRouter()
     const [dataItems, setData] = useState([])
+    const  [queryId, setQueryId] = useState(null)
     useEffect(() => {
+        if(router.query.id !== undefined) {
+            setQueryId(router.query.id)
+        }
         setData(data)
     }, [data])
 
+    const likeArticle = (blogId, userLike) => {
+        LikeArtcleScore(blogId, userLike).then(() => {
+            setTimeout(() => {
+                if(queryId != null){
+                    getPostCategory(queryId).then(result => {
+                        setData(result)
+                    })
+                }else{
+                    getPost().then(result => {
+                        setData(result['blog'])
+                    })
+                }
+            }, 100);
+        })
+    }
 
     return (
         <div className="card-columns">
@@ -16,21 +39,21 @@ const CardContent = ({ data }) => {
                 dataItems.map((items, idx) => {
                     return (
                         <Card key={idx}>
-                            <Link href={{pathname: "/detail",query: {content: items.id}}}>
+                            <Link href={{ pathname: "/detail", query: { content: items.id } }}>
                                 <a>
                                     <div className="img-wrapper">
                                         <Card.Img variant="top" src={items.cover} />
                                     </div>
                                 </a>
                             </Link>
-                            <div className="wrapper-like" onClick={() => console.log("like score")} >
+                            <div className="wrapper-like" onClick={() => likeArticle(items.id, presenter.signinComponentReducer.userProfile.id)} >
                                 <div className="like">
                                     <div className="like-inside">
                                         <div className="pb-3">
                                             <img className="w-100" src="/assets/images/logo/heart-icon.png" alt="heart-icon" />
                                         </div>
                                         <div className="text-like  w-100 text-center">
-                                            {1}
+                                            {items.fk_like_blog.length}
                                         </div>
                                     </div>
                                 </div>
@@ -46,40 +69,6 @@ const CardContent = ({ data }) => {
                                         <div className="d-flex w-50 justify-content-start">{items.own_user.first_name + " " + items.own_user.last_name}</div>
                                         <div className="d-flex w-50 justify-content-end">{items.pub_date.slice(0, 10)}</div>
                                     </div>
-                                    <div className="d-flex w-75 jusfity-content-start pt-3 pb-3">
-                                        <div className="d-flex w-25">
-
-                                            <Link href="#">
-                                                <a>
-                                                    <img src="assets/images/logo/facebook.png" alt="facebook" className="w-100" />
-                                                </a>
-                                            </Link>
-                                        </div>
-                                        <div className="d-flex w-25">
-
-                                            <Link href="#">
-                                                <a>
-                                                    <img src="assets/images/logo/google.png" alt="google" className="w-75" />
-                                                </a>
-                                            </Link>
-                                        </div>
-                                        <div className="d-flex w-25">
-
-                                            <Link href="#">
-                                                <a>
-                                                    <img src="assets/images/logo/linkedin.png" alt="linkedin" className="w-75" />
-                                                </a>
-                                            </Link>
-                                        </div>
-                                        <div className="d-flex w-25">
-
-                                            <Link href="#">
-                                                <a>
-                                                    <img src="assets/images/logo/ig.png" alt="ig" className="w-100" />
-                                                </a>
-                                            </Link>
-                                        </div>
-                                    </div>
                                 </div>
                             </Card.Body>
                         </Card>
@@ -90,4 +79,10 @@ const CardContent = ({ data }) => {
     )
 }
 
-export default CardContent;
+
+const mapStateToProps = state => {
+    return { presenter: state };
+}
+
+export default connect(mapStateToProps)(CardContent)
+

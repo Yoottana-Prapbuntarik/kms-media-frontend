@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState } from "react";
 import { Carousel } from "react-bootstrap";
 import "./Carousel.scss";
@@ -21,12 +22,22 @@ const CarouselSlide = ({ images }: any): any => {
                             <Carousel.Item key={index}>
                                 <img
                                     className="d-block w-100"
-                                    src={items.img}
+                                    src={items.cover_url}
                                     alt="First slide"
                                 />
                                 <Carousel.Caption>
-                                <h3>{items.title}</h3>
-                                <p>{items.detail}</p>
+                                <h1 className="text-center">{items.title}</h1>
+                                <p className="pt-0">{items.sub_title}</p>
+                                <Link href={{
+                                    pathname: "news-detail",
+                                    query:{
+                                        id: items.id
+                                    }
+                                }}>
+                                    <a className="border p-3 mt-2 rounded text-white">
+                                        อ่านเพิ่มเติม
+                                    </a>
+                                </Link>
                                 </Carousel.Caption>
                                 <div className="bg-alpha"></div>
                             </Carousel.Item>

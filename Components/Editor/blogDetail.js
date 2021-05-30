@@ -3,6 +3,7 @@ import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
 import draftToMarkdown from "draftjs-to-markdown";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import ReactMarkdownWithHtml from "react-markdown/with-html";
+import "./blog-detail.scss";
 
 const previewProductDetail = ({ detailBlog }) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -18,7 +19,7 @@ const previewProductDetail = ({ detailBlog }) => {
   return (
     <div className="container my-5">
       <div className="row">
-        <div className="col-12 my-5 demo-content">
+        <div className="col-12 demo-content">
           <ReactMarkdownWithHtml
             children={draftToMarkdown(
               convertToRaw(editorState.getCurrentContent())
