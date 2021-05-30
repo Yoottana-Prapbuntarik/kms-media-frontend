@@ -37,10 +37,10 @@ const SearchResults = ({data}) => {
 }
 
 SearchResults.getInitialProps = async ({query}) => {
-  let url = new URL(env.BASE_API+"blog/search"),
-  params = {search: query.keyword}
+  let url = new URL(env.BASE_API+"blog/search")
+  let params = {search: query.keyword}
   Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-  const res = await fetch(url)
+  const res = await fetch(url.toString())
   const data = await res.json()
   const jsonData = data
   return {
