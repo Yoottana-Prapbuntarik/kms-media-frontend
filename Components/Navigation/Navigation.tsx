@@ -3,12 +3,15 @@ import {
     Navbar,
     Nav
 } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import Router from "next/router";
 import Link from 'next/link';
 import './nav.scss';
 import { Fragment, useEffect, useState } from "react";
 const Navigation = ({ navigationPresenter, signinComponentPresenter, getUserData }: any) => {
     const [isScroll, setIsScroll] = useState(false)
+    const [keyword, setKeyword] = useState("")
+    const [toggleSearch, setToggleSearch] = useState(false)
     useEffect(() => {
         getUserData()
         window.onscroll = () => {
@@ -20,6 +23,29 @@ const Navigation = ({ navigationPresenter, signinComponentPresenter, getUserData
         };
     }, [])
 
+    const search = () => {
+        Router.push({
+            pathname: "/search-results",
+                query: {
+                    keyword: keyword
+                    }
+                })
+        setToggleSearch(false)
+        }
+
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+        Router.push({
+            pathname: "/search-results",
+                query: {
+                    keyword: keyword
+                    }
+                })
+        setToggleSearch(false)
+        }
+    }
+    
     return (
         <Fragment>
 
@@ -40,6 +66,8 @@ const Navigation = ({ navigationPresenter, signinComponentPresenter, getUserData
                                     return (
                                         // navLinkList.keyTitle !== "Category" ?
                                         <Fragment key={idx}>
+                                        {
+
                                             <div className="d-flex justify-content-around">
 
                                                 <Link href={navLinkList.routePath} key={idx} passHref>
@@ -48,6 +76,8 @@ const Navigation = ({ navigationPresenter, signinComponentPresenter, getUserData
                                                     </a>
                                                 </Link>
                                             </div>
+                                        }
+
                                         </Fragment>
                                         // : 
                                         // <Fragment key={idx}>
@@ -80,14 +110,12 @@ const Navigation = ({ navigationPresenter, signinComponentPresenter, getUserData
                                 {
                                     navigationPresenter.social.map((navSocial, idx: number) => {
                                         return (
-                                            <Link href={navSocial.routePath} passHref key={idx}>
-                                                <a className="nav-link link-social">
+                                                <a className="nav-link link-social" onClick={()=> setToggleSearch(!toggleSearch)} key={idx}>
                                                     {
 
-                                                        <img className="img-social" src={navSocial.keyTitle} alt="icon social" />
+                                                        <img className="img-social" src={navSocial.keyTitle} alt="icon social" /> 
                                                     }
                                                 </a>
-                                            </Link>
                                         )
                                     })
                                 }
@@ -146,6 +174,23 @@ const Navigation = ({ navigationPresenter, signinComponentPresenter, getUserData
                     </Navbar.Collapse>
                 </div>
             </Navbar>
+            <Modal
+                show={toggleSearch}
+                size="xl"
+                onHide={() => setToggleSearch(false)}
+                dialogClassName="modal-90w"
+                aria-labelledby="example-custom-modal-styling-title"
+            >
+                <Modal.Header closeButton>
+                    Search 
+                </Modal.Header>
+                <Modal.Body>
+                <div className="d-flex">
+                    <input type="text" className="form-control" onChange={(e)=> setKeyword(e.target.value)} onKeyDown={(e) => handleKeyDown(e)}/>
+                    <button className="btn" onClick={()=> search()}>Search</button>
+                </div>
+                </Modal.Body>
+            </Modal>
         </Fragment>
     )
 }
