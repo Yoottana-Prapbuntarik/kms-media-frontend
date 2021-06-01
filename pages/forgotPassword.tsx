@@ -21,7 +21,7 @@ const ForgotPassword = () => {
         </title>
             </Head>
             <div className="container mt-5">
-                <h1 className="text-center">
+                <h1 className="text-center mb-5">
                     ลืมรหัสผ่าน
                 </h1>
                 <div className="row">
