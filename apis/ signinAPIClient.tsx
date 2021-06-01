@@ -50,9 +50,6 @@ export const getUserData: any = () => async (dispatch: Dispatch) => {
       }
     })
     .catch((error) => {
-      if (error.response.status === 401) {
-        localStorage.removeItem('access-token')
-      }      
       if (error) {
         dispatch({
           type: SigninActionAPI.SigninGetUserProfileFailed,

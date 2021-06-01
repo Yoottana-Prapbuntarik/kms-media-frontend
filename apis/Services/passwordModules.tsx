@@ -1,10 +1,10 @@
 import { service } from "../baseAPI";
 
-export const changePassword = async (password: string, token: string) => {
-    let dataAPI = [];
+export const changePasswordAPI = async (password: string, token: string) => {
+    let dataAPI = {};
     await service({
         method: 'post',
-        url: 'password_reset/confirm',
+        url: '/password_reset/confirm/',
         data: {
             password: password,
             token: token
@@ -12,12 +12,12 @@ export const changePassword = async (password: string, token: string) => {
     })
         .then(response => {
             if (response) {
-                dataAPI = response.data;
+                dataAPI = response;
             }
 
         })
         .catch(err => {
-            dataAPI = err.response.data;
+            dataAPI = err.response;
         });
     return dataAPI;
 };
@@ -26,7 +26,7 @@ export const sendEmail = async (email: string) => {
     let dataAPI = [];
     await service({
         method: 'post',
-        url: 'password_reset',
+        url: 'password_reset/',
         data: {
             email: email,
         }
