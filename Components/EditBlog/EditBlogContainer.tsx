@@ -153,6 +153,9 @@ const mapDisPatchToProps = (dispatch: Dispatch) => ({
         if (userId !== undefined && category !== "" && category != 0 && title.length > 0 && subTitle.length > 0 && cover.length > 0) {
             dispatch(updateArticle(localStorage.getItem("update-blog-id"), content, userId, category, title, subTitle, cover))
             dispatch({ type: EditBlogAction.writeBlogResetEdit })
+            localStorage.removeItem("edit-draft")
+            localStorage.removeItem("update-blog-id")
+            localStorage.removeItem("edit-draft-detail")
         } else {
             dispatch({
                 type: EditBlogAction.handlePostStatusEdit,
