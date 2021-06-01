@@ -19,9 +19,6 @@ const EditUpdate = ({
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [data, setData] = useState(null);
 
-  // Get item from Draft
-
-  const [isFetch, setIsFetch] = useState(false);
   useEffect(() => {
     let loadDraftLocalStorage = editwriteBlogPresenter.contentDraft;
     if(loadDraftLocalStorage !== null) {
@@ -37,9 +34,7 @@ const EditUpdate = ({
       let getContentFromDB = convertFromRaw(loadDraftLocalStorage);
       setEditorState(EditorState.createWithContent(getContentFromDB));
     }
-
-    setIsFetch(false);
-  }, [isFetch === true]);
+  }, [editwriteBlogPresenter.contentDraft]);
 
   // Get item from Draft
 

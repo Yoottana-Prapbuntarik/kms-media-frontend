@@ -277,18 +277,15 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps) => ({
       let draftTest = {
         imagesCover:
           imagesCover === "" || imagesCover === undefined ? "" : imagesCover,
-
         title: title === "" || title === undefined ? "" : title,
-
         subTitle: subTitle === "" || subTitle === undefined ? "" : subTitle,
-
         category: category === "" || category === undefined ? "" : category,
       };
 
       localStorage.setItem("edit-draft", evnet);
       localStorage.setItem("update-blog-id", JSON.stringify(blogId));
       localStorage.setItem("edit-draft-detail", JSON.stringify(draftTest));
-      Router.push("/edit-blog");
+        Router.push("/edit-blog");
     }
   },
 });
