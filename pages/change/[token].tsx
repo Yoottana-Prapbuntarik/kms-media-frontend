@@ -54,9 +54,8 @@ const ChangePassword = () => {
                                                 ...password,
                                                 password: e.target.value
                                             })} required />
-                                       
-                                        <label className="mt-5">ยืนยันผ่านใหม่</label>
-                                        <input className="form-control" type="password" placeholder="รหัสผ่านใหม่" value={password.confirm}
+                                        <label className="mt-5">ยืนยันรหัสผ่านใหม่</label>
+                                        <input className="form-control" type="password" placeholder="ยืนยันรหัสผ่านใหม่" value={password.confirm}
                                             onChange={(e) => setPassword({
                                                 ...password,
                                                 confirm: e.target.value
