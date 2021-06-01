@@ -26,7 +26,7 @@ export const sendEmail = async (email: string) => {
     let dataAPI = [];
     await service({
         method: 'post',
-        url: 'password_reset',
+        url: 'password_reset/',
         data: {
             email: email,
         }
