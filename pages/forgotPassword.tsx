@@ -33,13 +33,13 @@ const ForgotPassword = () => {
                                 </div>
                                 <div className="col-lg-6 col-12 d-flex align-items-center justify-content-center">
                                     <div className="col-12 p-0">
-                                        <label>อีเมล์</label>
+                                        <label>อีเมล</label>
                                         <input className="form-control" type="text" placeholder="email" value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required />
                                         <div className="d-flex justify-content-end">
                                         <button className="btn btn-primary mt-5" >
-                                            ส่งอีเมล์
+                                            ส่งอีเมล
                                         </button>
                                         </div>
                                     </div>
