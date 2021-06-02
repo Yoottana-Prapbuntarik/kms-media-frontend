@@ -14,9 +14,13 @@
     box-shadow: 3px 3px 5px #bfbdbd;
   }
   
+.rdw-editor-toolbar {
 
+  border: 1px solid #ced4da !important;
+}
   .editorClassName {
       background-color: #ffffff;
+      border: 1px solid #ced4da;
       max-height: 530px;
       padding: 0px 1rem;
       padding-bottom: 4rem;
