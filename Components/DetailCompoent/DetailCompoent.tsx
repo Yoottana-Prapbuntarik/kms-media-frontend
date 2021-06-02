@@ -103,7 +103,7 @@ const DetailCompoent = ({
           show={detailCompoentPresenter.isCommentStatus !== null}
           confirmBtnBsStyle="btn bg-primary w-25 text-white mt-5"
           cancelBtnBsStyle="btn bg-danger w-25 text-white mt-5"
-          title={"Complated"}
+          title={"Completed"}
           onConfirm={() => asknowledge()}
         >
           {detailCompoentPresenter.isCommentMessage}
@@ -117,7 +117,7 @@ const DetailCompoent = ({
           show={detailCompoentPresenter.isCommentStatus !== null}
           confirmBtnBsStyle="btn bg-primary w-25 text-white mt-5"
           cancelBtnBsStyle="btn bg-danger w-25 text-white mt-5"
-          title={`In Complated`}
+          title={`In Completed`}
           onConfirm={() => asknowledge()}
         >
           {detailCompoentPresenter.isCommentMessage}
