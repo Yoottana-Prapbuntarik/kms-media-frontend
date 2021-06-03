@@ -55,7 +55,8 @@ export const updateUploadDocument = async (
       student_code: studentCode,
       document_status: documentStatus,
       document_file_review: documentFileReview,
-      template: template
+      template: template,
+      comment: ""
     },
   })
     .then(response => {
